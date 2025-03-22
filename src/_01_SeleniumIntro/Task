@@ -1,0 +1,28 @@
+✅ Techno Study Mentoring Task
+Konu: Selenium ile Web Sitesinde Kayıt Olma İşlemi
+
+🎯 Amaç:
+Bu görevde, Selenium WebDriver kullanarak gerçek bir web sitesi üzerinden kullanıcı kayıt (registration) işleminin otomasyonunu gerçekleştirmeyi öğreneceksiniz.
+
+📝 Görev Adımları:
+
+1. http://tutorialsninja.com/demo/ adresine gidin.
+2. Sağ üst köşede yer alan "My Account" menüsüne tıklayın.
+3. Açılan menüden "Register" seçeneğini tıklayın.
+4. Açılan kayıt formunda aşağıdaki alanları doldurun:
+   - First Name: Adınızı girin.
+   - Last Name: Soyadınızı girin.
+   - Email: Geçerli bir e-posta adresi girin.
+   - Telephone: Telefon numarası girin.
+   - Password: Şifrenizi girin.
+   - Password Confirm: Aynı şifreyi tekrar girin.
+5. "Privacy Policy" kutucuğunu işaretleyin.
+6. "Continue" butonuna tıklayarak kayıt işlemini tamamlayın.
+7. Tarayıcıyı kapatın.
+
+💡 İpuçları:
+- Her bir input alanına erişim için id, name, class, cssSelector, xPath gibi uygun locator stratejilerini kullanabilirsiniz.
+- Her çalıştırmada yeni bir e-posta adresi kullanmanız gerekebilir, aksi takdirde “email already registered” hatası alabilirsiniz.
+
+✅ Ekstra Gereklilik (Opsiyonel):
+- Kodunuzu JUnit test yapısı ile çalıştırabilirsiniz.

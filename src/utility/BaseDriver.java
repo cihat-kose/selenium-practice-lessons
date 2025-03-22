@@ -5,36 +5,52 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.time.Duration;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 public class BaseDriver {
 
-    public static WebDriver driver; // SingletonDriver method
+    public static WebDriver driver;
     public static WebDriverWait wait;
 
-    static {  // The condition of this is that it is extends and takes place in the first place.
-
-        Logger logger = Logger.getLogger(""); // Get output logs.
-        logger.setLevel(Level.SEVERE);              // Show only ERRORs
-
+    // Statik blok - WebDriver ve diğer yapılandırmalar burada tanımlanıyor
+    static {
+        // ChromeDriver başlatılır ve temel ayarlamalar yapılır
         driver = new ChromeDriver();
-        driver.manage().window().maximize(); // It maximizes the screen.
-        driver.manage().timeouts().pageLoadTimeout(Duration.ofSeconds(30)); // 30 sec delay: time to load the page
-        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(30));  // 30 sec delay: time to find the element
-        wait = new WebDriverWait(driver, Duration.ofSeconds(20));
+        driver.manage().window().maximize();  // Tarayıcı tam ekran yapılır
+
+        // Sayfa yüklenmesi için maksimum bekleme süresi (30 saniye)
+        driver.manage().timeouts().pageLoadTimeout(Duration.ofSeconds(30));
+
+        /**
+         * pageLoadTimeout - WebDriver'ın bir sayfanın tamamen yüklenmesini beklemesini sağlar.
+         * Eğer sayfa belirtilen süre içinde yüklenmezse, TimeoutException hatası fırlatılır.
+         * Örnek: 30 saniye içinde sayfa yüklenmezse, hata fırlatılır.
+         */
+
+        // Web elementlerin yüklenmesi için zımni bekleme süresi (30 saniye)
+        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(30));
+
+        /**
+         * implicitlyWait - Sayfadaki öğelerin bulunması için belirli bir süre beklemeyi sağlar.
+         * Bu süre zarfında öğe bulunamazsa, WebDriver bu süre kadar arama yapmaya devam eder.
+         */
+
+        // Explicit wait ve JavascriptExecutor tanımlanır
+        wait = new WebDriverWait(driver, Duration.ofSeconds(30));
     }
 
+    // Tarayıcıyı belirli bir süre bekleyip kapatan metod
     public static void waitAndClose() {
-        MyFunction.wait(5);
-        driver.quit();
+        MyFunction.wait(3);  // 3 saniye bekleme
+        driver.quit();       // Tarayıcıyı kapat
     }
 }
 
-//  Java fast - Website slow
-//  It tries to find the java element, but the website is still loading, it says I couldn't find java before the site is loaded, and it ends,
-//  When trying to find web element (FindElement/s) -->
-//  Solution 1: we will give some time (20s)
-
-//  Thread.sleep(); -> It stops Java directly for the given time. The more seconds you give, the more it stops the program. That's why it doesn't work for us.
-//  For example, we gave him 20 seconds to exit when he finds us, we want him to find java at 10 seconds and exit, not to wait 20 seconds.
+/**
+ * BaseDriver Sınıfı:
+ * Bu sınıf, WebDriver'ın temel yapılandırmalarını içeren bir altyapı sağlar.
+ * - ChromeDriver kullanılarak tarayıcı başlatılır ve yönetilir.
+ * - Sayfa yükleme süresi ve zımni bekleme süreleri ayarlanmıştır.
+ * - WebDriverWait ve JavascriptExecutor objeleri de global olarak tanımlanmıştır.
+ * <p>
+ * waitAndClose() metodu, belirli bir süre bekledikten sonra tarayıcıyı kapatır.
+ */
