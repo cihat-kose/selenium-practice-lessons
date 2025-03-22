@@ -1,1 +1,1 @@
-# TestingProject_01_Selenium_JUnit_Xpath
+# Selenium Practice Lesson
