@@ -11,13 +11,13 @@ Welcome to the **selenium-practice-lesson** repository! This project is designed
 ## Table of Contents
 - [Introduction](#-introduction)
 - [Installation](#-installation)
-- [Usage](#usage)
+- [Usage](#-usage)
 - [Features](#-features)
 - [Dependencies](#-dependencies)
 - [Configuration](#-configuration)
 - [Documentation](#-documentation)
 - [Examples](#-examples)
-- [Troubleshooting](#troubleshooting)
+- [Troubleshooting](#-troubleshooting)
 - [Contributors](#-contributors)
 - [Contributing](#-contributing)
 - [License](#-license)
@@ -47,7 +47,7 @@ Welcome to the **selenium-practice-lesson** repository! This project is designed
 - Easy-to-understand structure for beginners and intermediate learners.
 
 ## 📦 Dependencies
-- Java JDK 11 or newer
+- Java JDK 21 or newer
 - Selenium WebDriver
 - JUnit 5
 - Commons IO
