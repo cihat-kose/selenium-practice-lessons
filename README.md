@@ -16,7 +16,7 @@ Welcome to the **selenium-practice-lesson** repository! This project is designed
 - [📦 Dependencies](#📦-dependencies)
 - [🔧 Configuration](#🔧-configuration)
 - [📚 Documentation](#📚-documentation)
-- [💡 Examples](#💡-examples)
+- [💡 Examples](#💡-Examples)
 - [🛠️ Troubleshooting](#🛠️-troubleshooting)
 - [👥 Contributors](#👥-contributors)
 - [🤝 Contributing](#🤝-contributing)
