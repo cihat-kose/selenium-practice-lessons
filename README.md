@@ -14,7 +14,6 @@ Welcome to the **selenium-practice-lesson** repository! This project is designed
 - [Usage](#-usage)
 - [Features](#-features)
 - [Dependencies](#-dependencies)
-- [Configuration](#-configuration)
 - [Documentation](#-documentation)
 - [Examples](#-examples)
 - [Troubleshooting](#-troubleshooting)
@@ -23,17 +22,22 @@ Welcome to the **selenium-practice-lesson** repository! This project is designed
 - [License](#-license)
 
 ## 📥 Installation
+
 1. Open IntelliJ IDEA.
 2. Select **File > New > Project from Version Control**.
 3. Enter the repository URL: `https://github.com/cihat-kose/selenium-practice-lesson.git` and click **Clone**.
-4. Make sure you have JDK installed:
-   - Go to **File > Project Structure > Project**, and set the correct JDK version.
-5. Add dependencies using Maven:
-   - Go to **File > Project Structure > Libraries**.
-   - Add the following Maven artifacts:
+4. Ensure JDK is installed:
+   - Go to **File > Project Structure > Project**
+   - Set the **Project SDK** to **Java 21** (or later)
+5. Add required dependencies manually:
+   - Go to **File > Project Structure > Libraries**
+   - Click the **+** icon and select **From Maven**
+   - Add the following artifacts:
      - `org.seleniumhq.selenium:selenium-java:latest`
      - `commons-io:commons-io:latest`
      - `org.slf4j:slf4j-nop:latest`
+
+💡 *No `pom.xml` or `build.gradle` is required. All dependencies are added manually through IntelliJ IDEA.*
 
 ## ⚙️ Usage
 1. Open the project in IntelliJ IDEA.
@@ -52,9 +56,6 @@ Welcome to the **selenium-practice-lesson** repository! This project is designed
 - JUnit 5
 - Commons IO
 - SLF4J NOP
-
-## 🔧 Configuration
-All dependencies are managed using Maven. Ensure `pom.xml` includes the necessary libraries, and that your IDE recognizes the Maven configuration.
 
 ## 📚 Documentation
 Each test file includes inline documentation explaining the scenario and Selenium functions being used.
@@ -84,25 +85,25 @@ Each test file includes inline documentation explaining the scenario and Seleniu
 ## 🛠️ Troubleshooting
 If you experience any issues:
 
-- Verify browser drivers (e.g. ChromeDriver) are installed and up-to-date.
-- Check your Maven dependencies are correctly configured.
-- Confirm your Java SDK and IDE settings are compatible with the project.
-- Review console logs for stack traces and failure points.
-- Open an issue on the GitHub repository with detailed information.
+- Make sure all `.jar` dependencies are correctly added in your IDE.
+- Check that your browser drivers (e.g., ChromeDriver) are up-to-date.
+- Ensure that your Project SDK is set correctly in IntelliJ.
+- Review test logs and console output to identify failures.
+- Still stuck? [Open an issue on GitHub](https://github.com/cihat-kose/selenium-practice-lesson/issues) and describe your problem in detail.
 
 ## 👥 Contributors
-- [cihat-kose](https://github.com/cihat-kose) - Cihat Köse  
-- [SefaKahramann](https://github.com/SefaKahramann) - Sefa Kahraman
+- [cihat-kose](https://github.com/cihat-kose) – Cihat Köse  
+- [SefaKahramann](https://github.com/SefaKahramann) – Sefa Kahraman
 
 ## 🤝 Contributing
-Want to improve the project? Great! Follow these steps:
+Contributions are welcome! Please follow these steps:
 1. Fork the repository.
-2. Create a branch (`git checkout -b your-feature`).
-3. Commit your changes (`git commit -m 'Add something awesome'`).
-4. Push the branch (`git push origin your-feature`).
-5. Submit a Pull Request.
+2. Create a new branch (`git checkout -b feature-branch`).
+3. Commit your changes (`git commit -m 'Add new feature'`).
+4. Push to the branch (`git push origin feature-branch`).
+5. Create a Pull Request.
 
 ## 📜 License
-This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for full details.
+This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for details.
 
-For more information or to contribute, check out the [selenium-practice-lesson GitHub repository](https://github.com/cihat-kose/selenium-practice-lesson).
+For more info, visit the [selenium-practice-lesson GitHub page](https://github.com/cihat-kose/selenium-practice-lesson).
