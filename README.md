@@ -9,18 +9,18 @@
 Welcome to the **selenium-practice-lesson** repository! This project is designed for practical learning and hands-on exercises in UI test automation using Selenium. It’s ideal for those who want to strengthen their Selenium skills through real-world test scenarios.
 
 ## Table of Contents
-- [💡 Introduction](#💡-introduction)
-- [📥 Installation](#📥-installation)
-- [⚙️ Usage](#⚙️-usage)
-- [✨ Features](#✨-features)
-- [📦 Dependencies](#📦-dependencies)
-- [🔧 Configuration](#🔧-configuration)
-- [📚 Documentation](#📚-documentation)
-- [💡 Examples](#💡-Examples)
-- [🛠️ Troubleshooting](#🛠️-troubleshooting)
-- [👥 Contributors](#👥-contributors)
-- [🤝 Contributing](#🤝-contributing)
-- [📜 License](#📜-license)
+- [Introduction](#-introduction)
+- [Installation](#-installation)
+- [Usage](#-usage)
+- [Features](#-features)
+- [Dependencies](#-dependencies)
+- [Configuration](#-configuration)
+- [Documentation](#-documentation)
+- [Examples](#-examples)
+- [Troubleshooting](#-troubleshooting)
+- [Contributors](#-contributors)
+- [Contributing](#-contributing)
+- [License](#-license)
 
 ## 📥 Installation
 1. Open IntelliJ IDEA.
