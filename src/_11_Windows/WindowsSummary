@@ -1,0 +1,26 @@
+
+  Windows (Multiple Windows)
+
+- Tanım:
+  Selenium ile birden fazla tarayıcı penceresi veya sekmesi açıldığında, farklı pencereler arasında geçiş yapılabilir.
+  Her bir pencere, Selenium tarafından unique bir pencere ID'si (Window Handle) ile tanımlanır.
+
+- Selenium Kullanımı:
+  Mevcut aktif pencerenin ID'si driver.getWindowHandle() metodu ile alınır.
+  Örnek: String mainWindow = driver.getWindowHandle();
+
+  Açık olan tüm pencerelerin ID'leri driver.getWindowHandles() metodu ile bir Set<String> döndürür.
+  Örnek: Set<String> allWindows = driver.getWindowHandles();
+
+  Yeni açılan bir pencereye geçiş yapmak için driver.switchTo().window(windowID) metodu kullanılır.
+  Örnek: driver.switchTo().window(newWindow);
+
+- Önemli Noktalar:
+  Yeni bir pencere açıldığında eski pencere ID'si saklanmalıdır (örn. mainWindow).
+  İşlemler bittikten sonra ana pencereye geri dönmek için driver.switchTo().window(mainWindow) kullanılır.
+  Pencereler arasında geçiş yapılmazsa, Selenium komutları yanlış pencere üzerinde çalışabilir
+  ve NoSuchWindowException hatası alınabilir.
+  Yeni bir pencere açmak için genellikle driver.findElement(By.linkText("Open New Window")).click()
+  gibi bir yöntemle etkileşimde bulunulur.
+  Her yeni pencere veya sekme farklı bir "Window Handle" ile temsil edilir.
+

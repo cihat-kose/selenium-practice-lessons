@@ -2,7 +2,9 @@ package _10_Scroll;
 
 import org.junit.Test;
 import org.openqa.selenium.By;
+import org.openqa.selenium.WebElement;
 import utility.BaseDriver;
+import utility.MyFunction;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -25,17 +27,29 @@ public class InfiniteScrollTest extends BaseDriver {
 
     @Test
     public void loadAndPrintTenParagraphs() {
+        // 1. Adım: "Infinite Scroll" sayfasına gidin
         driver.get("https://the-internet.herokuapp.com/infinite_scroll");
 
         // 2. Adım: Paragrafları saklamak için bir liste oluşturun
         List<String>paragraphs = new ArrayList<>();
 
+        // 3. Adım: 10 paragrafı toplamak için döngü başlatın
         for (int i = 1; i <= 10; i++) {
-            // 4. Adım: JavaScriptExecutor ile sayfayı aşağı kaydırın
+            // 4. Adım: JavaScriptExecutor ile sayfayı aşağı kaydırın (Her kaydirmada yeni paragraf olusuyor)
             js.executeScript("window.scrollTo(0, document.body.scrollHeight);");
+
+            // 5. Adım: Yeni yüklenen paragrafların yüklenmesini beklemek için kısa bir süre duraklama ekleyin
+            MyFunction.wait(1);
+
+            // 6. Adım: Yüklenen paragrafı tespit edin ve listeye ekleyin
+            WebElement paragraph = driver.findElement(By.xpath("(//div[@class='jscroll-added'])[" + i + "]"));
+            paragraphs.add(paragraph.getText());
+
+            // 7. Adım: Paragrafı konsola yazdırın
+            System.out.println(i + ". Paragraph: " + paragraph.getText());
         }
 
-
-
+        // 8. Adım: Test tamamlandıktan sonra tarayıcıyı kapatın
+            waitAndClose();
     }
 }
