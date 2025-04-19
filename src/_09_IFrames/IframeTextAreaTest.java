@@ -33,8 +33,10 @@ public class IframeTextAreaTest extends BaseDriver {
         wait.until(ExpectedConditions.frameToBeAvailableAndSwitchToIt(By.xpath("//iframe[@id='iframeResult']")));
 
 //        // Alternatif geçiş yöntemleri:
+
 //        WebElement iframe = driver.findElement(By.xpath("//iframe[@id='iframeResult']"));
 //        driver.switchTo().frame(iframe);
+
 //        driver.switchTo().frame("iframeResult");
 //        driver.switchTo().frame(0);
 

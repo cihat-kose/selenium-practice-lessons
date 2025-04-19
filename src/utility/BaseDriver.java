@@ -1,5 +1,6 @@
 package utility;
 
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.support.ui.WebDriverWait;
@@ -10,6 +11,7 @@ public class BaseDriver {
 
     public static WebDriver driver;
     public static WebDriverWait wait;
+    public static JavascriptExecutor js;
 
     // Statik blok - WebDriver ve diğer yapılandırmalar burada tanımlanıyor
     static {
@@ -36,6 +38,7 @@ public class BaseDriver {
 
         // Explicit wait ve JavascriptExecutor tanımlanır
         wait = new WebDriverWait(driver, Duration.ofSeconds(30));
+        js = (JavascriptExecutor) driver;
     }
 
     // Tarayıcıyı belirli bir süre bekleyip kapatan metod
