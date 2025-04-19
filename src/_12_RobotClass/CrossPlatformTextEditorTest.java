@@ -1,6 +1,7 @@
 package _12_RobotClass;
 
 import org.junit.Test;
+import utility.MyFunction;
 
 import java.awt.*;
 import java.awt.event.KeyEvent;
@@ -38,7 +39,7 @@ public class CrossPlatformTextEditorTest {
         }
 
         // 3. Açılması için bekle
-        Thread.sleep(3000);
+        MyFunction.wait(3);
 
         // 4. Robot nesnesi oluştur
         Robot robot = new Robot();
@@ -65,7 +66,7 @@ public class CrossPlatformTextEditorTest {
         }
 
         // 6. Bekleme
-        Thread.sleep(1000);
+        MyFunction.wait(1);
 
         // 7. Uygulamayı kapat
         if (os.contains("win")) {
