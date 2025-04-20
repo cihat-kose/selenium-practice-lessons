@@ -1,12 +1,12 @@
-# Selenium Practice Lesson
+# Selenium Practice Lessons
 
 ![Java](https://img.shields.io/badge/Java-ED8B00?style=for-the-badge&logo=java&logoColor=white)
 ![Selenium](https://img.shields.io/badge/Selenium-43B02A?style=for-the-badge&logo=selenium&logoColor=white)
-![JUnit](https://img.shields.io/badge/JUnit-25A162?style=for-the-badge&logo=junit5&logoColor=white)
+![JUnit](https://img.shields.io/badge/JUnit-25A162?style=for-the-badge&logo=junit&logoColor=white)
 ![GitHub last commit](https://img.shields.io/github/last-commit/cihat-kose/selenium-practice-lesson?style=for-the-badge)
 
 ## 💡 Introduction
-Welcome to the **selenium-practice-lesson** repository! This project is designed for practical learning and hands-on exercises in UI test automation using Selenium. It’s ideal for those who want to strengthen their Selenium skills through real-world test scenarios.
+Welcome to the **selenium-practice-lessons** repository! This project is designed for practical learning and hands-on exercises in UI test automation using Selenium. It’s ideal for those who want to strengthen their Selenium skills through real-world test scenarios.
 
 ## Table of Contents
 - [Introduction](#-introduction)
@@ -51,11 +51,11 @@ Welcome to the **selenium-practice-lesson** repository! This project is designed
 - Easy-to-understand structure for beginners and intermediate learners.
 
 ## 📦 Dependencies
-- Java JDK 21 or newer
-- Selenium WebDriver
-- JUnit 5
-- Commons IO
-- SLF4J NOP
+- **Java JDK**: 11 or newer (tested on 21.0.6)
+- **Selenium WebDriver**: 4.31.0
+- **JUnit**: 4.13.1 (comes bundled with Java setup in most IDEs)
+- **Commons IO**: 2.11.0
+- **SLF4J NOP**: 1.7.30
 
 ## 📚 Documentation
 Each test file includes inline documentation explaining the scenario and Selenium functions being used.
@@ -89,7 +89,7 @@ If you experience any issues:
 - Check that your browser drivers (e.g., ChromeDriver) are up-to-date.
 - Ensure that your Project SDK is set correctly in IntelliJ.
 - Review test logs and console output to identify failures.
-- Still stuck? [Open an issue on GitHub](https://github.com/cihat-kose/selenium-practice-lesson/issues) and describe your problem in detail.
+- Still stuck? [Open an issue on GitHub](https://github.com/cihat-kose/selenium-practice-lessons/issues) and describe your problem in detail.
 
 ## 👥 Contributors
 - [cihat-kose](https://github.com/cihat-kose) – Cihat Köse  
@@ -106,4 +106,4 @@ Contributions are welcome! Please follow these steps:
 ## 📜 License
 This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for details.
 
-For more info, visit the [selenium-practice-lesson GitHub page](https://github.com/cihat-kose/selenium-practice-lesson).
+For more info, visit the [selenium-practice-lessons GitHub page](https://github.com/cihat-kose/selenium-practice-lessons).
