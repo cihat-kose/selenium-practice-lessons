@@ -25,7 +25,7 @@ Welcome to the **selenium-practice-lessons** repository! This project is designe
 
 1. Open IntelliJ IDEA.
 2. Select **File > New > Project from Version Control**.
-3. Enter the repository URL: `https://github.com/cihat-kose/selenium-practice-lesson.git` and click **Clone**.
+3. Enter the repository URL: `https://github.com/cihat-kose/selenium-practice-lessons.git` and click **Clone**.
 4. Wait for Maven to automatically download all dependencies.
 5. Verify that **Project SDK** is set to **Java 21** (or newer):
 - Go to **File → Project Structure → Project**
