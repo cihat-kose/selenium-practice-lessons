@@ -1,0 +1,19 @@
+
+Techno Study Mentoring Task
+Konu: Locators
+
+1. "https://parabank.parasoft.com/parabank/index.htm" adresine gidiniz.
+2. "Register" butonuna tıklayınız.
+3. "First Name" alanına {firstName} giriniz.
+4. "Last Name" alanına {lastName} giriniz.
+5. "Address" alanına {address} giriniz.
+6. "City" alanına {city} giriniz.
+7. "State" alanına {state} giriniz.
+8. "Zip Code" alanına {zipCode} giriniz.
+9. "Phone Number" alanına {phoneNumber} giriniz.
+10. "SSN" alanına {ssn} giriniz.
+11. "Username" alanına {username} giriniz.
+12. "Password" alanına {password} giriniz.
+13. "Confirm Password" alanına {password} giriniz.
+14. "Register" butonuna tıklayınız.
+15. Başarılı bir şekilde kaydolduğunuzu doğrulayınız.
