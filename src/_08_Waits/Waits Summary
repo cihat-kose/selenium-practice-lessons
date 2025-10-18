@@ -1,0 +1,75 @@
+
+Selenium Waits
+
+1. Selenium'da Wait (Bekleme) Nedir?
+   - Selenium'da Wait, sayfadaki elementlerin istenen duruma gelmesini beklemeyi sağlayan mekanizmadır.
+   - Dinamik web sayfalarında, sayfa yüklenmeden veya elementler görünmeden önce etkileşim kurmaya çalışırsak,
+     NoSuchElementException veya ElementNotInteractableException gibi hatalar alabiliriz.
+   - Bu sorunları çözmek için Selenium'da çeşitli bekleme stratejileri kullanılır.
+
+2. Selenium Wait Türleri:
+   a) Implicit Wait (Dolaylı Bekleme):
+      - WebDriver'ın, bir element bulunana kadar belirli bir süre beklemesini sağlar.
+      - Tek seferde ayarlanır ve tüm element bulma işlemleri için geçerlidir.
+      - Dezavantajı, element bulunduğunda hemen devam etmesine rağmen,
+        her element bulma işleminde belirlenen süre kadar bekleyebilir.
+      - Kullanımı:
+        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
+
+   b) Explicit Wait (Açık Bekleme):
+      - Belirli bir koşul sağlanana kadar bekleyen daha kontrollü bir bekleme yöntemidir.
+      - Koşul sağlanırsa bekleme sona erer, sağlanmazsa bir timeout hatası alınır.
+      - WebDriverWait ve ExpectedConditions sınıfı ile birlikte kullanılır.
+      - Kullanımı:
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("example")));
+
+   c) Fluent Wait (Esnek Bekleme):
+      - Explicit Wait'in daha esnek bir versiyonudur.
+      - Bekleme süresi, periyodik kontrol aralıkları ve timeout süreleri gibi parametrelerle çalışır.
+      - Kullanımı:
+        FluentWait<WebDriver> wait = new FluentWait<>(driver)
+        .withTimeout(Duration.ofSeconds(30))
+        .pollingEvery(Duration.ofSeconds(5))
+        .ignoring(NoSuchElementException.class);
+
+3. Bekleme Türlerinin Karşılaştırılması:
+   - Implicit Wait: Tüm element bulma işlemlerinde genel bir bekleme sağlar, ancak daha az esnektir.
+   - Explicit Wait: Belirli bir koşulun sağlanmasını bekler, daha esnek ve özelleştirilebilir.
+   - Fluent Wait: Explicit Wait ile benzer ancak kontrol aralıklarını özelleştirme
+                  ve belirli istisnaları göz ardı etme imkanı sunar.
+
+4. Bekleme ile İlgili En Sık Kullanılan ExpectedConditions:
+   a) visibilityOfElementLocated(By locator): Elementin sayfada görünür olmasını bekler.
+   b) elementToBeClickable(By locator): Elementin tıklanabilir olmasını bekler.
+   c) presenceOfElementLocated(By locator): Elementin sayfada yer almasını bekler (görünür olmayabilir).
+   d) titleContains("title"): Sayfa başlığının belirtilen başlığı içermesini bekler.
+   e) alertIsPresent(): Sayfada bir alert penceresinin varlığını bekler.
+
+5. Selenium Waits ile Çalışma Adımları:
+   a) Implicit Wait ayarlama:
+      driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
+
+   b) Explicit Wait ile belirli bir koşulu bekleme:
+      WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+      wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("example")));
+
+   c) Fluent Wait ayarlama:
+      FluentWait<WebDriver> wait = new FluentWait<>(driver)
+      .withTimeout(Duration.ofSeconds(30))
+      .pollingEvery(Duration.ofSeconds(5))
+      .ignoring(NoSuchElementException.class);
+
+6. Selenium Waits ile Görevler:
+   a) Implicit Wait Görevi:
+      - Belirli bir sayfada, elementlerin yüklenmesini bekle ve element bulunur bulunmaz aksiyonu gerçekleştir.
+      - Bekleme süresini 10 saniye olarak ayarla.
+
+   b) Explicit Wait Görevi:
+      - Sayfada bir elementin tıklanabilir olmasını bekle ve tıkla.
+      - Bekleme süresini 15 saniye olarak ayarla.
+
+   c) Fluent Wait Görevi:
+      - Bir sayfadaki elementin görünmesini bekle, her 5 saniyede bir kontrol et
+        ve element bulunmazsa 30 saniye sonunda hata ver.
+

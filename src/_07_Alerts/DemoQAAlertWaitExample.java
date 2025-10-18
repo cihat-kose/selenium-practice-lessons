@@ -7,6 +7,7 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import utility.BaseDriver;
 
 public class DemoQAAlertWaitExample extends BaseDriver {
+
     /**
      Task: Explicit Wait ile Zamanlı Alert Yakalama
      Görev Adımları:
@@ -28,7 +29,7 @@ public class DemoQAAlertWaitExample extends BaseDriver {
 
         // 3. Adım: Explicit Wait ile alert penceresinin açılmasını bekle
         // WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));  // Maksimum 10 saniye bekle
-        wait.until(ExpectedConditions.alertIsPresent()); // Alert'in görünmesini bekle
+        wait.until(ExpectedConditions.alertIsPresent());  // Alert'in görünmesini bekle
 
         // 4. Adım: Alert penceresini kabul et (OK butonuna bas)
         driver.switchTo().alert().accept();
@@ -37,3 +38,4 @@ public class DemoQAAlertWaitExample extends BaseDriver {
         waitAndClose();
     }
 }
+

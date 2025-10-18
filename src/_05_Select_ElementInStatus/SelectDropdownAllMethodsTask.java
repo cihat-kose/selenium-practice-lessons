@@ -1,4 +1,4 @@
-package _05_Select;
+package _05_Select_ElementInStatus;
 
 import org.junit.Assert;
 import org.junit.Test;
@@ -19,16 +19,16 @@ public class SelectDropdownAllMethodsTask extends BaseDriver {
         // Dropdown menüsünü buluyoruz
         WebElement dropdown = driver.findElement(By.id("dropdown"));
 
-        // Drodown menusunde Select sinifini kullaniyoruz
+        // Dropdown menüsünde Select sınıfını kullanıyoruz
         Select select = new Select(dropdown);
 
         // 1. Yöntem: Görünen metne göre seçim yapmak (selectByVisibleText)
         select.selectByVisibleText("Option 2");
 
-        // Secimin dogru olup olmadigini dogruluyoruz
+        // Seçimin doğru olup olmadığını doğruluyoruz
         WebElement selectedOption1 = select.getFirstSelectedOption();
         String selectedText1 = selectedOption1.getText();
-        System.out.println("Seçilen Değer (Görünen Metin): = " + selectedText1);
+        System.out.println("Seçilen Değer (Görünen Metin): " + selectedText1);
         Assert.assertEquals("Option 2", selectedText1);
 
         MyFunction.wait(5);
@@ -37,15 +37,16 @@ public class SelectDropdownAllMethodsTask extends BaseDriver {
 
         WebElement selectedOption2 = select.getFirstSelectedOption();
         String selectedText2 = selectedOption2.getText();
-        System.out.println("Seçilen Değer (Value Attribute): = " + selectedText2);
+        System.out.println("Seçilen Değer (Value Attribute): " + selectedText2);
         Assert.assertEquals("Option 1", selectedText2);
 
         MyFunction.wait(5);
         // 3. Yöntem: Index numarasına göre seçim yapmak (selectByIndex)
-        select.selectByIndex(2); // Option 2'nin index numarası 2
+        select.selectByIndex(2); // Option 2'nin index numarası 2'dir
+
         WebElement selectedOption3 = select.getFirstSelectedOption();
         String selectedText3 = selectedOption3.getText();
-        System.out.println("Seçilen Değer (Index): = " + selectedText3);
+        System.out.println("Seçilen Değer (Index): " + selectedText3);
         Assert.assertEquals("Option 2", selectedText3);
 
         MyFunction.wait(5);
@@ -57,14 +58,15 @@ public class SelectDropdownAllMethodsTask extends BaseDriver {
         }
 
         MyFunction.wait(5);
-        // 5. Yöntem: Ilksecili olan seçeneği almak (getFirstSelectedOption)
-        WebElement firstSelectedOption = select.getFirstSelectedOption();
-        String firstSelectedText = firstSelectedOption.getText();
-        System.out.println("İlk Seçili Olan Seçenek: = " + firstSelectedText);
+        // 5. Yöntem: İlk seçili olan seçeneği almak (getFirstSelectedOption)
+        WebElement firstSelected = select.getFirstSelectedOption();
+        String firstSelectedText = firstSelected.getText();
+        System.out.println("İlk Seçili Olan Değer: " + firstSelectedText);
+        Assert.assertEquals("Option 2", firstSelectedText);
 
         // Eğer dropdown multiple selection destekleseydi, aşağıdaki yöntem kullanılabilirdi:
         // select.deselectAll(); // Tüm seçimleri kaldırır (Multiple selection dropdown'larda geçerli)
 
-        waitAndClose();
+        waitAndClose(); // Tarayıcıyı kapatıyoruz
     }
 }
