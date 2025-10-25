@@ -1,0 +1,22 @@
+
+  IFrames
+
+- Tanım:
+  Iframe, bir HTML sayfası içinde başka bir HTML sayfası barındıran bir etikettir (<iframe>).
+  İframe'ler, sayfa içinde başka içerikleri izole etmek için kullanılır.
+
+- Selenium Kullanımı:
+  Iframe’e geçiş yapmak için driver.switchTo().frame() metodu kullanılır.
+  Örnek: driver.switchTo().frame("iframeID"); veya driver.switchTo().frame(WebElement);
+
+  Ana sayfaya geri dönmek için driver.switchTo().defaultContent() metodu kullanılır.
+  Örnek: driver.switchTo().defaultContent();
+
+  İç içe iframe'lerde bir üst frame'e geçmek için driver.switchTo().parentFrame() metodu kullanılır.
+  Örnek: driver.switchTo().parentFrame();
+
+- Önemli Noktalar:
+  Doğru iframe'e geçiş yapılmazsa Selenium NoSuchElementException hatası verir.
+  Bir iframe'den çıkılmadan, sayfanın geri kalan elementlerine erişilemez.
+  İframe'in ID'si, name’i veya WebElement olarak temsil edilen referans kullanılarak geçiş yapılabilir.
+  İframe'ler genellikle dış kütüphaneler, reklamlar veya üçüncü taraf içerikler için kullanılır.
