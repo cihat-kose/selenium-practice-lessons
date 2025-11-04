@@ -11,6 +11,7 @@ import java.awt.*;
 import java.awt.datatransfer.StringSelection;
 import java.awt.event.KeyEvent;
 
+
 public class DuckduckgoSearchWithRobotClass extends BaseDriver {
 
     /**
