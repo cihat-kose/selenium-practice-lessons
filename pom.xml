@@ -50,41 +50,30 @@
          Maven, projeyi derlemek ve testleri çalıştırmak için
          bu bölümdeki eklenti ayarlarını kullanır. -->
     <build>
-        <plugins>
+    <!-- sourceDirectory: Maven'a Java kaynak dosyalarının nerede olduğunu söyler.
+         Normalde: src/main/java
+         Bu projede tüm kodlar direkt src altında olduğu için değiştiriyoruz. -->
+    <sourceDirectory>src</sourceDirectory>
 
-            <!-- Maven Surefire Plugin
-                 "mvn test" komutunu çalıştırdığımızda devreye giren eklentidir.
-                 Hangi dosyaların test olduğunu ve nerede aranacağını belirler.
-
-                 Varsayılan davranış: sadece "src/test/java" klasörüne bakar.
-                 Bu projede testler "src" altında olduğu için
-                 aşağıdaki özel yapılandırma gereklidir. -->
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-surefire-plugin</artifactId>
-                <version>3.5.4</version>
-                <configuration>
-
-                    <!-- testSourceDirectory: Maven'a test dosyalarını
-                         nerede arayacağını söyler.
-                         Normalde: src/test/java
-                         Bu projede: src (tüm kaynak kodlar burada) -->
-                    <testSourceDirectory>src</testSourceDirectory>
-
-                    <!-- includes: hangi dosyaların test olarak çalıştırılacağını belirler.
-                         "**/*Test.java" ifadesi:
-                           ** = tüm alt klasörlerde ara
-                           *Test = adı "Test" ile biten her sınıf
-                           .java = sadece Java dosyaları
-                         Örnek: NinjaRegisterTest.java bulunur, BaseDriver.java bulunmaz. -->
-                    <includes>
-                        <include>**/*Test.java</include>
-                    </includes>
-
-                </configuration>
-            </plugin>
-
-        </plugins>
-    </build>
-
+    <plugins>
+        <!-- Maven Surefire Plugin: "mvn test" komutunda devreye girer.
+             Hangi dosyaların test olduğunu ve nerede aranacağını belirler.
+             Varsayılan olarak src/test/java klasörüne bakar.
+             Bu projede testler src altında olduğu için özel yapılandırma gerekir. -->
+        <plugin>
+            <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-surefire-plugin</artifactId>
+            <version>3.5.4</version>
+            <configuration>
+                <!-- testSourceDirectory: test dosyalarının bulunduğu klasör -->
+                <testSourceDirectory>src</testSourceDirectory>
+                <!-- includes: adı "Test" ile biten tüm Java dosyalarını test say.
+                     Örnek: NinjaRegisterTest.java bulunur, BaseDriver.java bulunmaz. -->
+                <includes>
+                    <include>**/*Test.java</include>
+                </includes>
+            </configuration>
+        </plugin>
+    </plugins>
+</build>
 </project>
