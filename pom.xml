@@ -2,46 +2,106 @@
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0
          http://maven.apache.org/xsd/maven-4.0.0.xsd">
-
     <modelVersion>4.0.0</modelVersion>
     <groupId>org.example</groupId>
     <artifactId>selenium-practice-lessons</artifactId>
     <version>1.0-SNAPSHOT</version>
 
     <dependencies>
-        <!-- https://mvnrepository.com/artifact/org.seleniumhq.selenium/selenium-java -->
+        <!-- Selenium WebDriver — tarayıcı otomasyonu için temel kütüphane -->
         <dependency>
             <groupId>org.seleniumhq.selenium</groupId>
             <artifactId>selenium-java</artifactId>
             <version>4.35.0</version>
         </dependency>
 
+        <!-- JUnit 4 — @Test anotasyonu ve test çalıştırma altyapısı -->
         <dependency>
             <groupId>junit</groupId>
             <artifactId>junit</artifactId>
             <version>4.13.2</version>
         </dependency>
 
-        <!-- https://mvnrepository.com/artifact/com.fasterxml.jackson.core/jackson-databind -->
+        <!-- Jackson Databind — Java nesnelerini JSON'a / JSON'ı Java'ya çevirir -->
         <dependency>
             <groupId>com.fasterxml.jackson.core</groupId>
             <artifactId>jackson-databind</artifactId>
             <version>2.21.5</version>
         </dependency>
 
-        <!-- https://mvnrepository.com/artifact/com.fasterxml.jackson.datatype/jackson-datatype-jsr310 -->
+        <!--
+            Jackson JSR310 — Java 8 tarih/saat tiplerini (LocalDate, LocalDateTime vb.)
+            Jackson ile kullanabilmek için gerekli modül.
+            jackson-databind ile aynı versiyonda olmalıdır.
+        -->
         <dependency>
             <groupId>com.fasterxml.jackson.datatype</groupId>
             <artifactId>jackson-datatype-jsr310</artifactId>
             <version>2.21.5</version>
         </dependency>
 
-        <!-- https://mvnrepository.com/artifact/io.github.testervippro/record-video -->
+        <!-- record-video — test sırasında ekran kaydı almak için -->
         <dependency>
             <groupId>io.github.testervippro</groupId>
             <artifactId>record-video</artifactId>
             <version>2.1</version>
         </dependency>
     </dependencies>
+
+    <!--
+        BUILD YAPLANDIRMASI
+        =====================
+        Maven, projeyi derlemek ve testleri çalıştırmak için
+        bu bölümdeki eklenti (plugin) ayarlarını kullanır.
+    -->
+    <build>
+        <plugins>
+
+            <!--
+                Maven Surefire Plugin
+                =====================
+                "mvn test" komutunu çalıştırdığımızda devreye giren eklentidir.
+                Hangi dosyaların test olduğunu ve nerede aranacağını belirler.
+
+                Varsayılan davranış:
+                - Sadece "src/test/java" klasörüne bakar.
+                - Bu projede testler standart Maven yapısında değil,
+                  direkt "src" klasörü altında bulunduğu için
+                  aşağıdaki özel yapılandırma gereklidir.
+            -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-surefire-plugin</artifactId>
+                <version>3.5.4</version>
+                <configuration>
+
+                    <!--
+                        testSourceDirectory
+                        -------------------
+                        Maven'a test dosyalarını nerede arayacağını söyler.
+                        Normalde: src/test/java
+                        Bu projede: src  (tüm kaynak kodlar burada)
+                    -->
+                    <testSourceDirectory>src</testSourceDirectory>
+
+                    <!--
+                        includes
+                        --------
+                        Hangi dosyaların test olarak çalıştırılacağını belirler.
+                        "**/*Test.java" ifadesi:
+                          **      → tüm alt klasörlerde ara
+                          *Test   → adı "Test" ile biten her sınıf
+                          .java   → sadece Java dosyaları
+                        Örnek: NinjaRegisterTest.java ✓  BaseDriver.java ✗
+                    -->
+                    <includes>
+                        <include>**/*Test.java</include>
+                    </includes>
+
+                </configuration>
+            </plugin>
+
+        </plugins>
+    </build>
 
 </project>
