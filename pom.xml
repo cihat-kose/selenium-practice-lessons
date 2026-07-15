@@ -8,39 +8,37 @@
     <version>1.0-SNAPSHOT</version>
 
     <dependencies>
-        <!-- Selenium WebDriver — tarayıcı otomasyonu için temel kütüphane -->
+        <!-- Selenium WebDriver: tarayıcı otomasyonu için temel kütüphane -->
         <dependency>
             <groupId>org.seleniumhq.selenium</groupId>
             <artifactId>selenium-java</artifactId>
             <version>4.35.0</version>
         </dependency>
 
-        <!-- JUnit 4 — @Test anotasyonu ve test çalıştırma altyapısı -->
+        <!-- JUnit 4: @Test anotasyonu ve test çalıştırma altyapısı -->
         <dependency>
             <groupId>junit</groupId>
             <artifactId>junit</artifactId>
             <version>4.13.2</version>
         </dependency>
 
-        <!-- Jackson Databind — Java nesnelerini JSON'a / JSON'ı Java'ya çevirir -->
+        <!-- Jackson Databind: Java nesnelerini JSON'a / JSON'ı Java'ya çevirir -->
         <dependency>
             <groupId>com.fasterxml.jackson.core</groupId>
             <artifactId>jackson-databind</artifactId>
             <version>2.21.5</version>
         </dependency>
 
-        <!--
-            Jackson JSR310 — Java 8 tarih/saat tiplerini (LocalDate, LocalDateTime vb.)
-            Jackson ile kullanabilmek için gerekli modül.
-            jackson-databind ile aynı versiyonda olmalıdır.
-        -->
+        <!-- Jackson JSR310: LocalDate, LocalDateTime gibi Java 8 tarih tiplerini
+             Jackson ile kullanabilmek için gerekli modül.
+             jackson-databind ile aynı versiyonda olmalıdır. -->
         <dependency>
             <groupId>com.fasterxml.jackson.datatype</groupId>
             <artifactId>jackson-datatype-jsr310</artifactId>
             <version>2.21.5</version>
         </dependency>
 
-        <!-- record-video — test sırasında ekran kaydı almak için -->
+        <!-- record-video: test sırasında ekran kaydı almak için -->
         <dependency>
             <groupId>io.github.testervippro</groupId>
             <artifactId>record-video</artifactId>
@@ -48,52 +46,37 @@
         </dependency>
     </dependencies>
 
-    <!--
-        BUILD YAPLANDIRMASI
-        =====================
-        Maven, projeyi derlemek ve testleri çalıştırmak için
-        bu bölümdeki eklenti (plugin) ayarlarını kullanır.
-    -->
+    <!-- BUILD YAPILANDIRMASI
+         Maven, projeyi derlemek ve testleri çalıştırmak için
+         bu bölümdeki eklenti ayarlarını kullanır. -->
     <build>
         <plugins>
 
-            <!--
-                Maven Surefire Plugin
-                =====================
-                "mvn test" komutunu çalıştırdığımızda devreye giren eklentidir.
-                Hangi dosyaların test olduğunu ve nerede aranacağını belirler.
+            <!-- Maven Surefire Plugin
+                 "mvn test" komutunu çalıştırdığımızda devreye giren eklentidir.
+                 Hangi dosyaların test olduğunu ve nerede aranacağını belirler.
 
-                Varsayılan davranış:
-                - Sadece "src/test/java" klasörüne bakar.
-                - Bu projede testler standart Maven yapısında değil,
-                  direkt "src" klasörü altında bulunduğu için
-                  aşağıdaki özel yapılandırma gereklidir.
-            -->
+                 Varsayılan davranış: sadece "src/test/java" klasörüne bakar.
+                 Bu projede testler "src" altında olduğu için
+                 aşağıdaki özel yapılandırma gereklidir. -->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-surefire-plugin</artifactId>
                 <version>3.5.4</version>
                 <configuration>
 
-                    <!--
-                        testSourceDirectory
-                        -------------------
-                        Maven'a test dosyalarını nerede arayacağını söyler.
-                        Normalde: src/test/java
-                        Bu projede: src  (tüm kaynak kodlar burada)
-                    -->
+                    <!-- testSourceDirectory: Maven'a test dosyalarını
+                         nerede arayacağını söyler.
+                         Normalde: src/test/java
+                         Bu projede: src (tüm kaynak kodlar burada) -->
                     <testSourceDirectory>src</testSourceDirectory>
 
-                    <!--
-                        includes
-                        --------
-                        Hangi dosyaların test olarak çalıştırılacağını belirler.
-                        "**/*Test.java" ifadesi:
-                          **      → tüm alt klasörlerde ara
-                          *Test   → adı "Test" ile biten her sınıf
-                          .java   → sadece Java dosyaları
-                        Örnek: NinjaRegisterTest.java ✓  BaseDriver.java ✗
-                    -->
+                    <!-- includes: hangi dosyaların test olarak çalıştırılacağını belirler.
+                         "**/*Test.java" ifadesi:
+                           ** = tüm alt klasörlerde ara
+                           *Test = adı "Test" ile biten her sınıf
+                           .java = sadece Java dosyaları
+                         Örnek: NinjaRegisterTest.java bulunur, BaseDriver.java bulunmaz. -->
                     <includes>
                         <include>**/*Test.java</include>
                     </includes>
