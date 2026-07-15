@@ -2,43 +2,41 @@
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0
          http://maven.apache.org/xsd/maven-4.0.0.xsd">
+
     <modelVersion>4.0.0</modelVersion>
     <groupId>org.example</groupId>
     <artifactId>selenium-practice-lessons</artifactId>
     <version>1.0-SNAPSHOT</version>
 
     <dependencies>
-        <!-- Selenium WebDriver: tarayıcı otomasyonu için temel kütüphane -->
+        <!-- https://mvnrepository.com/artifact/org.seleniumhq.selenium/selenium-java -->
         <dependency>
             <groupId>org.seleniumhq.selenium</groupId>
             <artifactId>selenium-java</artifactId>
             <version>4.35.0</version>
         </dependency>
 
-        <!-- JUnit 4: @Test anotasyonu ve test çalıştırma altyapısı -->
         <dependency>
             <groupId>junit</groupId>
             <artifactId>junit</artifactId>
             <version>4.13.2</version>
         </dependency>
 
-        <!-- Jackson Databind: Java nesnelerini JSON'a / JSON'ı Java'ya çevirir -->
+        <!-- https://mvnrepository.com/artifact/com.fasterxml.jackson.core/jackson-databind -->
         <dependency>
             <groupId>com.fasterxml.jackson.core</groupId>
             <artifactId>jackson-databind</artifactId>
             <version>2.21.5</version>
         </dependency>
 
-        <!-- Jackson JSR310: LocalDate, LocalDateTime gibi Java 8 tarih tiplerini
-             Jackson ile kullanabilmek için gerekli modül.
-             jackson-databind ile aynı versiyonda olmalıdır. -->
+        <!-- https://mvnrepository.com/artifact/com.fasterxml.jackson.datatype/jackson-datatype-jsr310 -->
         <dependency>
             <groupId>com.fasterxml.jackson.datatype</groupId>
             <artifactId>jackson-datatype-jsr310</artifactId>
             <version>2.21.5</version>
         </dependency>
 
-        <!-- record-video: test sırasında ekran kaydı almak için -->
+        <!-- https://mvnrepository.com/artifact/io.github.testervippro/record-video -->
         <dependency>
             <groupId>io.github.testervippro</groupId>
             <artifactId>record-video</artifactId>
@@ -46,34 +44,4 @@
         </dependency>
     </dependencies>
 
-    <!-- BUILD YAPILANDIRMASI
-         Maven, projeyi derlemek ve testleri çalıştırmak için
-         bu bölümdeki eklenti ayarlarını kullanır. -->
-    <build>
-    <!-- sourceDirectory: Maven'a Java kaynak dosyalarının nerede olduğunu söyler.
-         Normalde: src/main/java
-         Bu projede tüm kodlar direkt src altında olduğu için değiştiriyoruz. -->
-    <sourceDirectory>src</sourceDirectory>
-
-    <plugins>
-        <!-- Maven Surefire Plugin: "mvn test" komutunda devreye girer.
-             Hangi dosyaların test olduğunu ve nerede aranacağını belirler.
-             Varsayılan olarak src/test/java klasörüne bakar.
-             Bu projede testler src altında olduğu için özel yapılandırma gerekir. -->
-        <plugin>
-            <groupId>org.apache.maven.plugins</groupId>
-            <artifactId>maven-surefire-plugin</artifactId>
-            <version>3.5.4</version>
-            <configuration>
-                <!-- testSourceDirectory: test dosyalarının bulunduğu klasör -->
-                <testSourceDirectory>src</testSourceDirectory>
-                <!-- includes: adı "Test" ile biten tüm Java dosyalarını test say.
-                     Örnek: NinjaRegisterTest.java bulunur, BaseDriver.java bulunmaz. -->
-                <includes>
-                    <include>**/*Test.java</include>
-                </includes>
-            </configuration>
-        </plugin>
-    </plugins>
-</build>
 </project>
