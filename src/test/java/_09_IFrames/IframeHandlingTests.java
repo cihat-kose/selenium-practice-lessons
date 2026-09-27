@@ -5,6 +5,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import utility.BaseDriver;
+import utility.MyFunction;
 
 import java.util.List;
 
@@ -35,12 +36,16 @@ public class IframeHandlingTests extends BaseDriver {
                 ExpectedConditions.presenceOfElementLocated(By.id("iframe1")));
         driver.switchTo().frame(iframe);
 
+        MyFunction.wait(1);
+
         // Bu yazı ve email alanı iframe'in içindeki sayfaya aittir.
         assertTrue(driver.getPageSource().contains("We Leave From Here"));
         WebElement email = wait.until(
                 ExpectedConditions.visibilityOfElementLocated(By.id("email")));
         email.sendKeys("student@example.com");
         assertEquals("student@example.com", email.getAttribute("value"));
+
+        MyFunction.wait(1);
 
         // Ana sayfaya dön ve ana sayfa metninin yeniden erişilebilir olduğunu doğrula.
         driver.switchTo().defaultContent();

@@ -6,6 +6,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.Select;
 import utility.BaseDriver;
+import utility.MyFunction;
 
 import java.util.List;
 
@@ -22,13 +23,19 @@ public class SelectDropdownAllMethodsTask extends BaseDriver {
         select.selectByVisibleText("Two");
         Assert.assertEquals("Two", select.getFirstSelectedOption().getText());
 
+        MyFunction.wait(1);
+
         // HTML value değerine göre seçim yap.
         select.selectByValue("1");
         Assert.assertEquals("One", select.getFirstSelectedOption().getText());
 
+        MyFunction.wait(1);
+
         // Liste sırasındaki index 2'yi seç (ilk seçenek index 0'dır).
         select.selectByIndex(2);
         Assert.assertEquals("Two", select.getFirstSelectedOption().getText());
+
+        MyFunction.wait(1);
 
         // Seçili seçeneklerin tümünü al; bu menü tek seçimli olduğu için bir sonuç gelir.
         List<WebElement> selectedOptions = select.getAllSelectedOptions();
