@@ -1,0 +1,14 @@
+Native Dropdown: Select ile Seçenek Seçmek
+
+Bu test Selenium'un web-form.html örnek sayfasındaki normal dropdown'u kullanır:
+https://www.selenium.dev/selenium/web/web-form.html
+
+Sayfada iki benzer kontrol vardır: normal dropdown ve yazı yazılan datalist. Test, normal dropdown'u seçer ve Selenium'un Select sınıfıyla çalışır.
+
+Test sırayla:
+1) "Two" yazan seçeneği görünen yazısına göre seçer.
+2) value değeri "1" olan seçeneği seçer; ekranda "One" görünmelidir.
+3) Index 2 olan seçeneği seçer; ekranda yine "Two" görünmelidir.
+4) Seçili seçeneği ve listedeki tüm seçenekleri alıp doğrular.
+
+Bu dropdown tek seçenek seçebilir. Bu nedenle deselectAll() burada kullanılamaz; o yöntem yalnızca birden fazla seçime izin veren listelerde anlamlıdır.

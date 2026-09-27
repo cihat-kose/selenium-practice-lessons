@@ -1,22 +1,18 @@
+Iframe: Başka Bir Sayfanın İçine Bakmak
 
-  IFrames
+Iframe, bir web sayfasının içinde gösterilen başka bir sayfa gibidir. Iframe'in içindeki yazı veya kutuya ulaşmak için önce Selenium'un odağını o iframe'e taşımak gerekir.
 
-- Tanım:
-  Iframe, bir HTML sayfası içinde başka bir HTML sayfası barındıran bir etikettir (<iframe>).
-  İframe'ler, sayfa içinde başka içerikleri izole etmek için kullanılır.
+IframeHandlingTests Selenium'un kendi örnek sayfasını açar:
+https://www.selenium.dev/selenium/web/iframes.html
 
-- Selenium Kullanımı:
-  Iframe’e geçiş yapmak için driver.switchTo().frame() metodu kullanılır.
-  Örnek: driver.switchTo().frame("iframeID"); veya driver.switchTo().frame(WebElement);
+- printIframeCount:
+  Sayfadaki iframe'leri sayar ve en az bir tane olduğunu kontrol eder.
 
-  Ana sayfaya geri dönmek için driver.switchTo().defaultContent() metodu kullanılır.
-  Örnek: driver.switchTo().defaultContent();
+- printIframeText:
+  1) Ana sayfadaki "iframe1" kutusunu bulur.
+  2) driver.switchTo().frame(...) ile Selenium'u kutunun içine geçirir.
+  3) İç sayfada "We Leave From Here" yazısını arar.
+  4) İçerideki email alanına "student@example.com" yazar ve yazılan değeri kontrol eder.
+  5) defaultContent() ile ana sayfaya döner ve ana sayfanın yeniden erişilebilir olduğunu kontrol eder.
 
-  İç içe iframe'lerde bir üst frame'e geçmek için driver.switchTo().parentFrame() metodu kullanılır.
-  Örnek: driver.switchTo().parentFrame();
-
-- Önemli Noktalar:
-  Doğru iframe'e geçiş yapılmazsa Selenium NoSuchElementException hatası verir.
-  Bir iframe'den çıkılmadan, sayfanın geri kalan elementlerine erişilemez.
-  İframe'in ID'si, name’i veya WebElement olarak temsil edilen referans kullanılarak geçiş yapılabilir.
-  İframe'ler genellikle dış kütüphaneler, reklamlar veya üçüncü taraf içerikler için kullanılır.
+Özetle: Iframe içindeki bir şeye tıklamak veya yazmak için önce iframe'e geç; işin bitince ana sayfaya geri dön.

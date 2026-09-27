@@ -1,17 +1,11 @@
+Selenium Web Form - Native Dropdown
 
-Techno Study Mentoring Task
-Konu: Select
-
-1. https://the-internet.herokuapp.com/dropdown adresine gidiniz.
-2. Dropdown menüsünden Select sınıfını kullanarak seçim yapınız.
-3. Select sınıfının aşağıdaki tüm yöntemlerini kullanarak işlemleri gerçekleştirin:
-   - selectByVisibleText()
-   - selectByValue()
-   - selectByIndex()
-   - getFirstSelectedOption()
-   - getOptions()
-   - getAllSelectedOptions()
-   - deselectAll() (Eğer multiple selection destekleyen bir dropdown ise)
-4. Her adımda başarılı bir şekilde işlemin gerçekleştiğini doğrulayınız.
-
-
+1. https://www.selenium.dev/selenium/web/web-form.html sayfasını açın.
+2. Sayfadaki normal dropdown menüsünü bulun; yazı alanındaki datalist ile karıştırmayın.
+3. Select sınıfını kullanarak sırasıyla:
+   - Görünen yazı "Two" olan seçeneği seçin.
+   - value değeri "1" olan seçeneği seçin.
+   - Index 2 olan seçeneği seçin.
+4. Her seçimden sonra seçili yazının doğru olduğunu doğrulayın.
+5. getFirstSelectedOption(), getAllSelectedOptions() ve getOptions() ile seçili ve mevcut seçenekleri inceleyin.
+6. Bu dropdown tek seçimlidir; deselectAll() kullanılamaz.

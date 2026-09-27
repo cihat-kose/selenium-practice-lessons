@@ -1,46 +1,18 @@
+Alerts: Ne Deniyoruz?
 
-Selenium Alerts
+Alert, tarayıcının sayfanın üstünde açtığı küçük uyarı penceresidir. Bu pencere açıkken Selenium önce driver.switchTo().alert() ile pencereye geçer; sonra mesajını okuyabilir, kapatabilir veya metin yazabilir.
 
-1. Selenium'da Alert Nedir?
-   - Alert, web sayfalarında kullanıcıya bir mesaj göstermek için kullanılan pop-up pencerelerdir.
-   - Selenium, bu alert pencereleri ile etkileşimde bulunmak için `switchTo().alert()` metodunu kullanır.
+TheInternetHerokuappAlertExamples içindeki üç test Selenium'un kendi alerts.html örnek sayfasını kullanır:
 
-2. Selenium'da Alert Türleri:
-   a) Simple Alert: Kullanıcıya basit bir mesaj gösterir ve yalnızca "Tamam" (OK) düğmesine sahiptir.
-   b) Confirmation Alert: Kullanıcıdan bir onay ister ve "Tamam" (OK) ve "İptal" (Cancel) düğmeleri vardır.
-   c) Prompt Alert: Kullanıcıdan bir giriş (input) bekler, "Tamam" (OK) ve "İptal" (Cancel) düğmeleri vardır.
+1. handleSimpleJSAlertTest
+   "alert" düğmesine basar. Açılan mesajın "cheese" olduğunu kontrol eder ve OK ile kapatır.
 
-3. Selenium ile Alert Yönetimi:
-   - Alert penceresi açıldığında, Selenium WebDriver kontrolü kaybeder,
-     bu yüzden alert penceresini yönetmek için önce ona geçmemiz gerekir.
-   - `driver.switchTo().alert()` metodu ile alert'e geçiş yapılır.
+2. handleJSConfirmAlertTest
+   "confirm" düğmesine basar. "Are you sure?" mesajını kontrol eder ve Cancel anlamındaki dismiss() ile kapatır.
 
-4. Temel Alert Metodları:
-   a) accept(): Alert penceresindeki "Tamam" (OK) düğmesine tıklar.
-   b) dismiss(): Alert penceresindeki "İptal" (Cancel) düğmesine tıklar.
-   c) getText(): Alert penceresindeki mesajı alır.
-   d) sendKeys(): Prompt Alert'e bir değer girer.
+3. handleJSPromptAlertTest
+   "prompt" düğmesine basar. Alert'e "Merhaba, Selenium" yazar ve OK der. Sonra sayfadaki sonuç alanında aynı yazının göründüğünü kontrol eder.
 
-5. Selenium Alerts ile Çalışma Adımları:
-   a) Alert'i yakalama: `Alert alert = driver.switchTo().alert();`
-   b) Mesajı okuma: `String alertText = alert.getText();`
-   c) "Tamam" düğmesine tıklama: `alert.accept();`
-   d) "İptal" düğmesine tıklama: `alert.dismiss();`
-   e) Alert'e giriş yapma (Prompt): `alert.sendKeys("metin");`
+DemoQAAlertWaitExample de Selenium'un aynı sayfasındaki "slow-alert" düğmesini kullanır. Alert biraz gecikerek açıldığı için ExpectedConditions.alertIsPresent() ile görünmesini bekler, "Slow" mesajını kontrol eder ve kapatır.
 
-6. Örnekler:
-   - Simple Alert:
-     `driver.switchTo().alert().accept();`
-
-   - Confirmation Alert:
-     `Alert alert = driver.switchTo().alert();`
-     `alert.dismiss();`
-
-   - Prompt Alert:
-     `Alert alert = driver.switchTo().alert();`
-     `alert.sendKeys("Selenium");`
-     `alert.accept();`
-
-7. Selenium'da UnhandledAlertException:
-   - Eğer bir alert açıldığında onu yakalayıp yönetmezseniz, Selenium `UnhandledAlertException` hatası verir.
-   - Bu yüzden alert'leri mutlaka `switchTo().alert()` ile yakalayın ve işleminizi gerçekleştirin.
+Aynı sınıftaki handleRightClickAlertTest farklı bir konudur: The Internet demo sitesinde Hot Spot alanına sağ tıklar ve çıkan mesajı kontrol eder.
