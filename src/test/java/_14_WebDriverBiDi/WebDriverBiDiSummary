@@ -1,0 +1,27 @@
+WebDriver BiDi - Console Events
+
+- Tanım:
+  WebDriver BiDi, WebDriver ile tarayıcı arasında çift yönlü ve olay temelli iletişim sağlar.
+  Bu ders, tarayıcı konsolundaki bir mesajı BiDi olayı olarak dinleyip doğrular.
+
+- Testin Akışı:
+  ConsoleLogBidiTest Chrome oturumu açarken webSocketUrl capability'sini etkinleştirir.
+  Konsol olay dinleyicisini etkileşimden önce kaydeder.
+  Yerel webdriver-bidi-example.html fixture'ındaki butona tıklar.
+  Buton JavaScript console.log() çağrısı yapar; mesaj tarayıcıdan BiDi olayı olarak gelir.
+  CompletableFuture ile olayı en fazla 5 saniye bekler ve metni assertEquals ile doğrular.
+  @After metodu Chrome oturumunu kapatır.
+
+- Selenium Kullanımı:
+  WebDriver BiDi için ChromeOptions üzerinde WebSocket uç noktası istenir:
+  options.setCapability("webSocketUrl", true);
+
+  Konsol olayı dinleyicisi kaydedilir:
+  CompletableFuture<ConsoleLogEntry> event = new CompletableFuture<>();
+  remoteDriver.script().addConsoleMessageHandler(event::complete);
+
+- Önemli Noktalar:
+  Dinleyici olay tetiklenmeden önce kaydedilmelidir; aksi halde olay kaçırılabilir.
+  CompletableFuture.get(5, TimeUnit.SECONDS) asenkron olayı bekler ve sonsuz beklemeyi önler.
+  Test Chrome ve BiDi uyumlu ChromeDriver gerektirir; CI'daki test-compile yalnızca derlemeyi doğrular.
+  Test public bir siteye bağlı değildir; fixture src/test/resources/webdriver-bidi-example.html dosyasındadır.

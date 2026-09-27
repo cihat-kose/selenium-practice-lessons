@@ -1,0 +1,24 @@
+Shadow DOM
+
+- Tanım:
+  Shadow DOM, bir web component'in HTML ve stil içeriğini sayfanın geri kalanından ayıran DOM ağacıdır.
+  Bu örnekte <consent-panel> web component'i shadow host, onun içindeki ağaç ise Shadow DOM'dur.
+
+- Testin Akışı:
+  ShadowDomExampleTest yerel shadow-dom-example.html fixture'ını açar.
+  consent-panel host element'inin sayfaya gelmesini explicit wait ile bekler.
+  WebElement.getShadowRoot() ile host'un açık Shadow Root'una erişir.
+  #accept-all butonuna Shadow Root içinden tıklar.
+  #result alanında "Consent accepted" metnini bekler ve doğrular.
+
+- Selenium Kullanımı:
+  WebElement.getShadowRoot() bir SearchContext döndürür.
+  Shadow DOM içindeki elementler bu kökte findElement() ile aranır:
+  SearchContext shadowRoot = shadowHost.getShadowRoot();
+  WebElement button = shadowRoot.findElement(By.cssSelector("#accept-all"));
+
+- Önemli Noktalar:
+  driver.findElement() ile yapılan normal arama Shadow DOM sınırının içine geçmez.
+  Önce host bulunur, ardından Shadow Root alınır ve iç arama bu kökte yapılır.
+  Örnek açık (open) Shadow DOM kullanır; kapalı (closed) Shadow Root bu şekilde dışarıdan aranamaz.
+  Test public bir siteye bağlı değildir; fixture src/test/resources/shadow-dom-example.html dosyasındadır.
