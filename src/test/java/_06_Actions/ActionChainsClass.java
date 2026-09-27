@@ -9,8 +9,6 @@ import utility.MyFunction;
 
 public class ActionChainsClass extends BaseDriver {
 
-    Actions actions = new Actions(driver);
-
     /**
      * Test Senaryosu: Sağ Tıklama (Right Click) ve Çift Tıklama (Double Click) Aksiyonları
      *
@@ -25,6 +23,8 @@ public class ActionChainsClass extends BaseDriver {
      */
     @Test
     public void chainOfActionsTest() {
+        Actions actions = new Actions(driver);
+
         //1- Test yapılacak siteye git (Guru99 test sitesi)
         driver.get("http://demo.guru99.com/test/simple_context_menu.html");
 
@@ -84,6 +84,8 @@ public class ActionChainsClass extends BaseDriver {
      */
     @Test
     public void buildAndPerformTest() {
+        Actions actions = new Actions(driver);
+
         // 1. Adım: Test yapılacak siteye git (jQuery UI demo sitesi)
         driver.get("https://jqueryui.com/droppable/");
 

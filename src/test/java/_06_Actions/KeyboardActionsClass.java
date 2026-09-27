@@ -11,8 +11,6 @@ import utility.MyFunction;
 
 public class KeyboardActionsClass extends BaseDriver {
 
-    Actions actions = new Actions(driver);
-
     /**
      * Klavye Aksiyonları: Tek bir tuşa basma (sendKeys)
      */
@@ -69,6 +67,8 @@ public class KeyboardActionsClass extends BaseDriver {
      */
     @Test
     public void keyCombinationChainTest() {
+        Actions actions = new Actions(driver);
+
         driver.get("https://the-internet.herokuapp.com/key_presses");
 
         MyFunction.wait(2);

@@ -12,13 +12,13 @@ import utility.MyFunction;
 
 public class MouseActionsClass extends BaseDriver {
 
-    Actions actions = new Actions(driver);
-
     /**
      * Fare Aksiyonları: Bir elementin üzerine fareyi getirme (Mouse Hover)
      */
     @Test
     public void hoverOverTest() {
+        Actions actions = new Actions(driver);
+
         driver.get("http://the-internet.herokuapp.com/hovers");
 
         MyFunction.wait(2);
@@ -36,6 +36,8 @@ public class MouseActionsClass extends BaseDriver {
      */
     @Test
     public void doubleClickTest() {
+        Actions actions = new Actions(driver);
+
         // Testi gerçekleştireceğimiz sayfaya git
         driver.get("https://demoqa.com/buttons");
 
@@ -65,6 +67,8 @@ public class MouseActionsClass extends BaseDriver {
      */
     @Test
     public void rightClickTest() {
+        Actions actions = new Actions(driver);
+
         driver.get("http://the-internet.herokuapp.com/context_menu");
 
         MyFunction.wait(2);
@@ -86,6 +90,8 @@ public class MouseActionsClass extends BaseDriver {
      */
     @Test
     public void clickTest() {
+        Actions actions = new Actions(driver);
+
         driver.get("http://the-internet.herokuapp.com/add_remove_elements/");
 
         MyFunction.wait(2);
@@ -103,6 +109,8 @@ public class MouseActionsClass extends BaseDriver {
      */
     @Test
     public void clickAndHoldReleaseTest() {
+        Actions actions = new Actions(driver);
+
         driver.get("http://the-internet.herokuapp.com/drag_and_drop");
 
         MyFunction.wait(2);
@@ -124,6 +132,8 @@ public class MouseActionsClass extends BaseDriver {
      */
     @Test
     public void dragAndDropTest() {
+        Actions actions = new Actions(driver);
+
         driver.get("http://the-internet.herokuapp.com/drag_and_drop");
 
         MyFunction.wait(2);
