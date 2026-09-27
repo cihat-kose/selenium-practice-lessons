@@ -1,0 +1,14 @@
+Tanım
+CSS Selector, HTML elementini CSS seçici kurallarıyla bulmanın bir yoludur.
+
+Selenium Kullanımı
+Test, Selenium'un kendi locator demo sayfasında:
+- "#fname" ile First name alanını bulup değerinin "Jane" olduğunu kontrol eder.
+- Class ve ID'yi birlikte kullanan CSS selector ile Last name alanını bulur; değerinin "Doe" olduğunu doğrular.
+- name ve type özelliklerini kullanarak Newsletter checkbox'ını bulur ve başlangıçta seçili olmadığını kontrol eder.
+- type ve value özellikleriyle Female radio seçeneğini bulur, tıklar ve seçildiğini doğrular.
+
+Önemli Noktalar
+- CSS selector'lar By.cssSelector() içine yazılır.
+- "#fname" bir ID'yi, "[name='newsletter']" bir HTML özelliğini seçer.
+- Test yalnızca elementi bulmaz; tıklama sonrasında radio seçeneğinin durumunu da doğrular.

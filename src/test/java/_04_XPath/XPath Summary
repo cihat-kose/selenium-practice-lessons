@@ -1,0 +1,15 @@
+Tanım
+XPath, HTML sayfasında elementleri etiket, özellik ve metinlerine göre bulmayı sağlar.
+
+Selenium Kullanımı
+Test, Selenium'un kendi locator demo sayfasında:
+- ID özelliği "fname" olan input alanını bulur ve değerinin "Jane" olduğunu kontrol eder.
+- name ve type özellikleriyle Newsletter checkbox'ını bulur.
+- Checkbox'ın önce seçili olmadığını, tıklamadan sonra seçili olduğunu doğrular.
+- Görünen metni "Selenium Official Page" olan bağlantıyı bulur ve adresini kontrol eder.
+
+Önemli Noktalar
+- XPath ifadeleri By.xpath() içinde kullanılır.
+- [@id='fname'] gibi koşullar, aramayı belirli bir HTML özelliğine göre daraltır.
+- and birden fazla koşulu birleştirir.
+- normalize-space() metnin başındaki ve sonundaki boşlukları yok sayarak eşleşme sağlar.

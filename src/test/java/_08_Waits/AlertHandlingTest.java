@@ -1,41 +1,39 @@
 package _08_Waits;
 
+import org.junit.Assert;
 import org.junit.Test;
+import org.openqa.selenium.Alert;
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import utility.BaseDriver;
 
+/**
+ * Clicks Selenium's delayed-alert demo, waits for the alert, checks its message,
+ * and accepts it.
+ */
 public class AlertHandlingTest extends BaseDriver {
 
-    /**
-     Task:
-     Explicit Wait ile Zamanlı Alert Yakalama
-
-     Görev Adımları:
-     1. "https://demoqa.com/alerts" sitesine gidiniz.
-     2. "Click me" yazan butona tıklayınız. Bu buton, 5 saniye sonra bir alert penceresi açacaktır.
-     3. Bu alert penceresinin açılmasını bekleyiniz.
-     4. Alert penceresi açıldıktan sonra, alert'i kabul ediniz (OK butonuna basınız).
-     */
+    private static final String ALERTS_PAGE =
+            "https://www.selenium.dev/selenium/web/alerts.html";
 
     @Test
-    public void waitForAlert() {
-        // 1. Adım: DemoQA Alert sayfasına git
-        driver.get("https://demoqa.com/alerts");
+    public void waitForAlertAndVerifyItsMessage() {
+        driver.get(ALERTS_PAGE);
 
-        // 2. Adım: Zamanlayıcı ile alert çıkaran butonu bul ve tıkla
-        WebElement timerAlertButton = driver.findElement(By.id("timerAlertButton"));
-        timerAlertButton.click();
+        // This link opens an alert after a short delay.
+        driver.findElement(By.id("slow-alert")).click();
 
-        // 3. Adım: Explicit Wait ile alert penceresinin açılmasını bekle
-        // WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));  // 10 saniyeye kadar bekle
-        wait.until(ExpectedConditions.alertIsPresent());  // Alert'in görünmesini bekle
+        // Wait until the browser reports that the alert is open.
+        wait.until(ExpectedConditions.alertIsPresent());
 
-        // 4. Adım: Alert penceresini kabul et (OK butonuna bas)
-        driver.switchTo().alert().accept();
+        Alert alert = driver.switchTo().alert();
 
-        // 5. Adım: Testin başarılı olduğundan emin ol, tarayıcıyı kapat
+        // The Selenium demo's delayed alert displays the text "Slow".
+        Assert.assertEquals("Slow", alert.getText());
+
+        // Close the browser alert with its OK/Accept action.
+        alert.accept();
+
         waitAndClose();
     }
 }

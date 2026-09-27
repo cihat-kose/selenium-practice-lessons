@@ -1,19 +1,12 @@
+Selenium Locator Practice
 
-Techno Study Mentoring Task
-Konu: Locators
+Demo page:
+https://www.selenium.dev/selenium/web/locators_tests/locators.html
 
-1. "https://parabank.parasoft.com/parabank/index.htm" adresine gidiniz.
-2. "Register" butonuna tıklayınız.
-3. "First Name" alanına {firstName} giriniz.
-4. "Last Name" alanına {lastName} giriniz.
-5. "Address" alanına {address} giriniz.
-6. "City" alanına {city} giriniz.
-7. "State" alanına {state} giriniz.
-8. "Zip Code" alanına {zipCode} giriniz.
-9. "Phone Number" alanına {phoneNumber} giriniz.
-10. "SSN" alanına {ssn} giriniz.
-11. "Username" alanına {username} giriniz.
-12. "Password" alanına {password} giriniz.
-13. "Confirm Password" alanına {password} giriniz.
-14. "Register" butonuna tıklayınız.
-15. Başarılı bir şekilde kaydolduğunuzu doğrulayınız.
+Use Selenium to locate elements on the contact form:
+
+1. Find the first-name field with its class name and verify its ID is "fname" and its value is "Jane".
+2. Find all fields with the "information" class and verify that there are two.
+3. Find the last-name field by ID and verify its value is "Doe".
+4. Find the newsletter checkbox by name and verify that it is a checkbox.
+5. Find the "Selenium Official Page" link by its link text and verify its URL.
