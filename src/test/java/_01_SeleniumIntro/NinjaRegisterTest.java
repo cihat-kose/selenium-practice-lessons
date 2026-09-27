@@ -30,11 +30,12 @@ public class NinjaRegisterTest extends BaseDriver {
 
         MyFunction.wait(1);
         WebElement eMail = driver.findElement(By.id("input-email"));
-        eMail.sendKeys("test" + (int) (Math.random() * 10000) + "@test.com");
+        // Kayıt sitesi e-posta adresini benzersiz tuttuğundan, tekrar çalıştırmalarda çakışmayı önle.
+        eMail.sendKeys("selenium.student." + System.currentTimeMillis() + "@example.test");
 
         MyFunction.wait(1);
         WebElement telephone = driver.findElement(By.id("input-telephone"));
-        telephone.sendKeys("1234567890");
+        telephone.sendKeys("4155550123");
 
         MyFunction.wait(1);
         WebElement password = driver.findElement(By.id("input-password"));

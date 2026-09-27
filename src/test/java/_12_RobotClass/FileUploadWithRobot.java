@@ -12,10 +12,11 @@ import java.awt.*;
 import java.awt.datatransfer.StringSelection;
 import java.awt.event.KeyEvent;
 import java.util.List;
+import java.nio.file.Paths;
 
 /**
  * Bu test, Java Robot sınıfını kullanarak bir dosyanın nasıl yükleneceğini gösterir.
- * TAB, ENTER, CTRL+V ve SPACE gibi klavye eylemlerini simüle ederek
+ * TAB, ENTER ve CTRL+V gibi klavye eylemlerini simüle ederek
  * dosya yükleme penceresi ve form öğeleriyle etkileşir.
  */
 
@@ -24,6 +25,7 @@ public class FileUploadWithRobot extends BaseDriver {
     @Test
     public void uploadFileUsingRobotTest() throws AWTException {
         driver.get("http://demo.guru99.com/test/upload/");
+        // Sayfa açıldıktan sonra çerez penceresi gibi dinamik öğelerin yerleşmesine zaman tanı.
         MyFunction.wait(1);
 
         // Çerez/onay penceresi çıkarsa kabul et
@@ -37,26 +39,32 @@ public class FileUploadWithRobot extends BaseDriver {
 
             if (!acceptAll.isEmpty())
                 acceptAll.get(0).click();
+
+            // Selenium varsayılan sayfaya kendiliğinden dönmez; dosya alanı ana sayfadadır.
+            driver.switchTo().defaultContent();
         }
 
-        // Robot sınıfı ile dosya yükleme işlemini simüle et
+        // Bu sayfa gerçek file input'u gizlediği için native düğmeye TAB sırasıyla odaklan.
+        // WebDriver sendKeys alternatifi, FileUploadWithWebDriverLetcode sınıfında gösteriliyor.
         Robot robot = new Robot();
-
-        // "Choose File" (Dosya Seç) butonuna ulaşmak için TAB tuşuna 15 kez bas
+        robot.setAutoDelay(100);
         for (int i = 0; i < 15; i++) {
             robot.keyPress(KeyEvent.VK_TAB);
             robot.keyRelease(KeyEvent.VK_TAB);
         }
-
-        // ENTER’a basarak dosya seçme penceresini aç
         robot.keyPress(KeyEvent.VK_ENTER);
         robot.keyRelease(KeyEvent.VK_ENTER);
 
-        // Dosya yolunu panoya (clipboard) kopyala
-        // (öğrenciler kendi sistemlerine göre bu yolu değiştirmeli)
-        StringSelection filePath = new StringSelection("C:\\Users\\cihat\\Desktop\\filePath.txt");
+        // Native dosya penceresinin açılması Selenium tarafından izlenemediği için kısa bekle.
+        MyFunction.wait(1);
+
+        // Projedeki ortak test dosyasının tam yolunu bulup panoya kopyala.
+        // Bu fixture depoda bulunduğundan öğrencilerin kendi bilgisayarlarına göre yol değiştirmesi gerekmez.
+        StringSelection filePath = new StringSelection(
+                Paths.get("src", "test", "resources", "upload-sample.txt").toAbsolutePath().toString());
         Toolkit.getDefaultToolkit().getSystemClipboard().setContents(filePath, null);
 
+        // Panoya yapıştırılan yolun dosya adı alanına gelmesini bekle.
         MyFunction.wait(1);
 
         // CTRL+V ile dosya yolunu yapıştır
@@ -65,46 +73,43 @@ public class FileUploadWithRobot extends BaseDriver {
         robot.keyRelease(KeyEvent.VK_CONTROL);
         robot.keyRelease(KeyEvent.VK_V);
 
+        // Dosya penceresi kapanıp seçilen dosya sayfadaki input'a yansısın.
         MyFunction.wait(1);
 
-        // ENTER’a basarak dosya seçimini onayla
-        robot.keyPress(KeyEvent.VK_ENTER);
-        robot.keyRelease(KeyEvent.VK_ENTER);
+        for (int i = 0; i < 2; i++) {
+            robot.keyPress(KeyEvent.VK_ENTER);
+            robot.keyRelease(KeyEvent.VK_ENTER);
+        }
 
-        MyFunction.wait(3);
+        MyFunction.wait(1);
 
-        // Onay kutusuna ulaşmak için TAB tuşuna 2 kez bas
         for (int i = 0; i < 2; i++) {
             robot.keyPress(KeyEvent.VK_TAB);
             robot.keyRelease(KeyEvent.VK_TAB);
         }
 
-        MyFunction.wait(1);
+        WebElement termsCheckbox = driver.findElement(By.id("terms"));
+        if (!termsCheckbox.isSelected()) {
+            termsCheckbox.click();
+        }
 
-        // Şartlar kutusunu SPACE tuşuyla işaretle
-        robot.keyPress(KeyEvent.VK_SPACE);
-        robot.keyRelease(KeyEvent.VK_SPACE);
-
-        MyFunction.wait(1);
-
-        // Gönderme butonuna ulaşmak için TAB tuşuna 2 kez bas
+        // Robot ile klavye odağını ilerletme adımını göster; submit işlemini locator ile yap.
         for (int i = 0; i < 2; i++) {
             robot.keyPress(KeyEvent.VK_TAB);
             robot.keyRelease(KeyEvent.VK_TAB);
         }
 
-        MyFunction.wait(1);
+        // Formu tamamlamak için Submit File düğmesine bas.
+        WebElement submitButton = driver.findElement(By.id("submitbutton"));
+        wait.until(ExpectedConditions.elementToBeClickable(submitButton)).click();
 
-        // ENTER’a basarak formu gönder
-        robot.keyPress(KeyEvent.VK_ENTER);
-        robot.keyRelease(KeyEvent.VK_ENTER);
+        // Submit işleminden sonra başarı mesajı center öğesinde görünür.
+        WebElement successMessage = wait.until(ExpectedConditions.visibilityOfElementLocated(
+                By.xpath("//center[contains(normalize-space(.), 'has been successfully uploaded.')]")));
+        Assert.assertTrue("Dosya yükleme başarısız", successMessage.isDisplayed());
 
-        // Başarı mesajının göründüğünü doğrula
-        WebElement message = wait.until(ExpectedConditions.visibilityOfElementLocated(
-                By.xpath("//*[text()='has been successfully uploaded.']")));
-
-        Assert.assertTrue(message.isDisplayed());
-
+        // Başarı mesajı görünür olduktan sonra öğrenci sonucu inceleyebilsin diye
+        // tarayıcıyı kısa süre açık tutar; ardından kapatır.
         waitAndClose();
     }
 }

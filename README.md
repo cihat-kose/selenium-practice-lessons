@@ -22,10 +22,10 @@ enterprise framework architecture.
 | Java | 21 |
 | Maven Wrapper | 3.3.4 |
 | Maven | 3.9.11 |
-| Selenium Java | 4.49.0 |
+| Selenium Java | 4.35.0 |
 | JUnit | 4.13.2 |
-| Maven Compiler Plugin | 3.16.0 |
-| Maven Surefire Plugin | 3.6.0 |
+| Maven Compiler Plugin | 3.13.0 |
+| Maven Surefire Plugin | 3.2.5 |
 
 ## Repository Structure
 
@@ -105,6 +105,31 @@ Windows PowerShell:
 This starts a browser and runs one lesson class. Browser examples may depend on
 live/demo websites, network availability, and the current behavior of those sites.
 Running the complete suite is therefore not equivalent to a stable CI test suite.
+
+### Run every lesson test
+
+Windows PowerShell:
+
+```powershell
+.\mvnw.cmd "-Dtest=*" test
+```
+
+The wildcard includes lesson classes whose names do not match Maven Surefire's
+default `*Test` naming pattern. The full run includes Robot lessons that open
+desktop windows and interact with the system clipboard. Both file-upload lessons
+use the checked-in `src/test/resources/upload-sample.txt` fixture, so no personal
+desktop path needs to be edited. The search lessons use DuckDuckGo because Google
+may present an automated-traffic check that blocks the exercise.
+
+The native file-picker lesson (`FileUploadWithRobot`) needs an interactive
+desktop session because Java's `Robot` sends keys to the operating system's file
+dialog. In headless or remote test sessions, use `FileUploadWithWebDriverLetcode`
+to see the reliable `input[type=file].sendKeys(...)` approach. Run the Robot
+example on a desktop with the command:
+
+```powershell
+.\mvnw.cmd "-Dtest=_12_RobotClass.FileUploadWithRobot" test
+```
 
 ## Browser Driver and Lifecycle
 

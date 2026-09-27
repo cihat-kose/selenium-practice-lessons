@@ -27,31 +27,35 @@ public class XPathLocatorTask extends BaseDriver {
 
         // 4. Address alanına XPath ile "123 Ana Cadde" yazıyoruz (ID ile)
         WebElement addressInput = driver.findElement(By.xpath("//input[@id='customer.address.street']"));
-        addressInput.sendKeys("123 Ana Cadde");
+        addressInput.sendKeys("Munkegata 1");
 
         // 5. City alanına XPath ile "İstanbul" yazıyoruz (Name ile)
         WebElement cityInput = driver.findElement(By.xpath("//input[@name='customer.address.city']"));
-        cityInput.sendKeys("İstanbul");
+        cityInput.sendKeys("Trondheim");
 
         // 6. State alanına XPath ile "İstanbul" yazıyoruz (ID ile)
         WebElement stateInput = driver.findElement(By.xpath("//input[@id='customer.address.state']"));
-        stateInput.sendKeys("İstanbul");
+        stateInput.sendKeys("Trøndelag");
 
         // 7. Zip Code alanına XPath ile "34000" yazıyoruz (ID ile)
         WebElement zipCodeInput = driver.findElement(By.xpath("//input[@id='customer.address.zipCode']"));
-        zipCodeInput.sendKeys("34000");
+        zipCodeInput.sendKeys("7011");
 
         // 8. Phone Number alanına XPath ile "5551234567" yazıyoruz (ID ile)
         WebElement phoneNumberInput = driver.findElement(By.xpath("//input[@id='customer.phoneNumber']"));
-        phoneNumberInput.sendKeys("5551234567");
+        phoneNumberInput.sendKeys("73555555");
 
         // 9. SSN alanına XPath ile "123456789" yazıyoruz (ID ile)
         WebElement ssnInput = driver.findElement(By.xpath("//input[@id='customer.ssn']"));
-        ssnInput.sendKeys("123456789");
+        // Demo uygulaması tekrar kullanılan SSN değerini reddeder; gerçek kişisel bilgi kullanmıyoruz.
+        String sampleSsn = String.format("%09d", (System.currentTimeMillis() % 900_000_000L) + 100_000_000L);
+        ssnInput.sendKeys(sampleSsn);
 
         // 10. Username alanına XPath ile "kullaniciadi" yazıyoruz (ID ile)
         WebElement usernameInput = driver.findElement(By.xpath("//input[@id='customer.username']"));
-        usernameInput.sendKeys("kullaniciadi" + (int) (Math.random() * 10000));
+        // Her kayıt denemesi için sadece harf/rakam içeren yeni kullanıcı adı üret.
+        String username = "student" + System.currentTimeMillis();
+        usernameInput.sendKeys(username);
 
         // 11. Password alanına XPath ile "Sifre123" yazıyoruz (ID ile)
         WebElement passwordInput = driver.findElement(By.xpath("//input[@id='customer.password']"));

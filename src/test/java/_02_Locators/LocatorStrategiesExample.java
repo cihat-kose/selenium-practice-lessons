@@ -28,32 +28,36 @@ public class LocatorStrategiesExample extends BaseDriver {
 
         // 5. Adım: "Address" alanına {address} girin
         WebElement addressInput = driver.findElement(By.id("customer.address.street"));
-        addressInput.sendKeys("123 Ana Cadde");
+        addressInput.sendKeys("Munkegata 1");
 
         // 6. Adım: "City" alanına {city} girin
         WebElement cityInput = driver.findElement(By.name("customer.address.city"));
-        cityInput.sendKeys("İstanbul");
+        cityInput.sendKeys("Trondheim");
 
         // 7. Adım: "State" alanına {state} girin
         WebElement stateInput = driver.findElement(By.id("customer.address.state"));
-        stateInput.sendKeys("İstanbul");
+        stateInput.sendKeys("Trøndelag");
 
         // 8. Adım: "Zip Code" alanına {zipCode} girin
         WebElement zipCodeInput = driver.findElement(By.id("customer.address.zipCode"));
-        zipCodeInput.sendKeys("34000");
+        zipCodeInput.sendKeys("7011");
 
         // 9. Adım: "Phone Number" alanına {phoneNumber} girin
         WebElement phoneNumberInput = driver.findElement(By.id("customer.phoneNumber"));
-        phoneNumberInput.sendKeys("5551234567");
+        phoneNumberInput.sendKeys("73555555");
 
         // 10. Adım: "SSN" alanına {ssn} girin
         WebElement ssnInput = driver.findElement(By.id("customer.ssn"));
-        ssnInput.sendKeys("123456789");
+        // Demo uygulaması tekrar kullanılan SSN değerini reddeder; gerçek kişisel bilgi kullanmıyoruz.
+        String sampleSsn = String.format("%09d", (System.currentTimeMillis() % 900_000_000L) + 100_000_000L);
+        ssnInput.sendKeys(sampleSsn);
 
         // 11. Adım: "Username" alanına {username} girin
         MyFunction.wait(1);  // Neticeyi görmek için kısa bekleme
         WebElement usernameInput = driver.findElement(By.id("customer.username"));
-        usernameInput.sendKeys("kullaniciadi" + (int) (Math.random() * 10000));
+        // Her kayıt denemesi için sadece harf/rakam içeren yeni kullanıcı adı üret.
+        String username = "student" + System.currentTimeMillis();
+        usernameInput.sendKeys(username);
 
         // 12. Adım: "Password" alanına {password} girin
         MyFunction.wait(1);  // Neticeyi görmek için kısa bekleme

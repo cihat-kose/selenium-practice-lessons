@@ -27,31 +27,35 @@ public class CssSelectorTask extends BaseDriver {
 
         // 5. Address alanına CSS Selector ile "123 Ana Cadde" yazıyoruz (ID attribute ile)
         WebElement addressInput = driver.findElement(By.cssSelector("#customer\\.address\\.street"));
-        addressInput.sendKeys("123 Ana Cadde");
+        addressInput.sendKeys("Munkegata 1");
 
         // 6. City alanına CSS Selector ile "İstanbul" yazıyoruz (Name attribute ile)
         WebElement cityInput = driver.findElement(By.cssSelector("input[name='customer.address.city']"));
-        cityInput.sendKeys("İstanbul");
+        cityInput.sendKeys("Trondheim");
 
         // 7. State alanına CSS Selector ile "İstanbul" yazıyoruz (ID attribute ile)
         WebElement stateInput = driver.findElement(By.cssSelector("#customer\\.address\\.state"));
-        stateInput.sendKeys("İstanbul");
+        stateInput.sendKeys("Trøndelag");
 
         // 8. Zip Code alanına CSS Selector ile "34000" yazıyoruz (ID attribute ile)
         WebElement zipCodeInput = driver.findElement(By.cssSelector("#customer\\.address\\.zipCode"));
-        zipCodeInput.sendKeys("34000");
+        zipCodeInput.sendKeys("7011");
 
         // 9. Phone Number alanına CSS Selector ile "5551234567" yazıyoruz (ID attribute ile)
         WebElement phoneNumberInput = driver.findElement(By.cssSelector("#customer\\.phoneNumber"));
-        phoneNumberInput.sendKeys("5551234567");
+        phoneNumberInput.sendKeys("73555555");
 
         // 10. SSN alanına CSS Selector ile "123456789" yazıyoruz (ID attribute ile)
         WebElement ssnInput = driver.findElement(By.cssSelector("#customer\\.ssn"));
-        ssnInput.sendKeys("123456789");
+        // Demo uygulaması tekrar kullanılan SSN değerini reddeder; gerçek kişisel bilgi kullanmıyoruz.
+        String sampleSsn = String.format("%09d", (System.currentTimeMillis() % 900_000_000L) + 100_000_000L);
+        ssnInput.sendKeys(sampleSsn);
 
         // 11. Username alanına CSS Selector ile "kullaniciadi" yazıyoruz (ID attribute ile)
         WebElement usernameInput = driver.findElement(By.cssSelector("#customer\\.username"));
-        usernameInput.sendKeys("kullaniciadi" + (int) (Math.random() * 10000));
+        // Her kayıt denemesi için sadece harf/rakam içeren yeni kullanıcı adı üret.
+        String username = "student" + System.currentTimeMillis();
+        usernameInput.sendKeys(username);
 
         // 12. Password alanına CSS Selector ile "Sifre123" yazıyoruz (ID attribute ile)
         WebElement passwordInput = driver.findElement(By.cssSelector("#customer\\.password"));
@@ -66,7 +70,9 @@ public class CssSelectorTask extends BaseDriver {
         registerButton.click();
 
         // 15. Başarılı bir şekilde kaydolduğunuzu doğruluyoruz
-        WebElement successMessage = driver.findElement(By.cssSelector(".title"));
+        WebElement successMessage = driver.findElements(By.cssSelector(".title")).stream().findFirst().orElse(null);
+        Assert.assertNotNull("Kayıt tamamlanmadı. Sayfadaki mesaj: "
+                + driver.findElement(By.tagName("body")).getText(), successMessage);
         String actualMessage = successMessage.getText();
         System.out.println("Mesaj: " + actualMessage);
         Assert.assertTrue("Kayıt başarılı değil! Beklenen mesaj bulunamadı.", actualMessage.contains("Welcome"));

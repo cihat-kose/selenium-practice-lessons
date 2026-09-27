@@ -3,6 +3,7 @@ package utility;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.SessionNotCreatedException;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.junit.After;
 import org.junit.Before;
@@ -18,8 +19,25 @@ public class BaseDriver {
 
     @Before
     public void setUp() {
-        // A fresh browser is created for every test.
-        driver = new ChromeDriver();
+        // Her test için temiz bir Chrome oturumu oluştur. Chrome bazen ilk başlatmada
+        // process'i kapatabildiği için yalnızca oturum oluşturma hatasında bir kez dene.
+        try {
+            driver = new ChromeDriver();
+        } catch (SessionNotCreatedException firstAttempt) {
+            try {
+                Thread.sleep(1000);
+            } catch (InterruptedException interrupted) {
+                Thread.currentThread().interrupt();
+                throw new RuntimeException("Chrome yeniden denemesi kesintiye uğradı.", interrupted);
+            }
+
+            try {
+                driver = new ChromeDriver();
+            } catch (SessionNotCreatedException retryFailure) {
+                retryFailure.addSuppressed(firstAttempt);
+                throw retryFailure;
+            }
+        }
         driver.manage().window().maximize();
         driver.manage().timeouts().pageLoadTimeout(Duration.ofSeconds(30));
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(30));
@@ -44,9 +62,12 @@ public class BaseDriver {
         }
     }
 
-    // Retained by lessons so students can observe the browser before it closes.
+    /**
+     * Test sonucunu öğrencinin inceleyebilmesi için tarayıcıyı kısa süre açık tutup kapatır.
+     * Bu bekleme yalnızca ekranda gözlem içindir; test senkronizasyonu için WebDriverWait kullanılmalıdır.
+     */
     public void waitAndClose() {
-        MyFunction.wait(3);  // Keep the result visible for three seconds.
+        MyFunction.wait(3);  // Sonuç ekranını inceleyebilmek için tarayıcıyı 3 saniye açık tut.
         if (driver != null) {
             WebDriver currentDriver = driver;
             driver = null;
