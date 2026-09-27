@@ -36,7 +36,7 @@ public class DuckduckgoSearchWithRobotClass extends BaseDriver {
         driver.get("https://duckduckgo.com");
 
         // 2. Arama kutusuna tıkla
-        WebElement searchBox = driver.findElement(By.id("searchbox_input"));
+        WebElement searchBox = driver.findElement(By.name("q"));
         searchBox.click();
 
         // 3. Robot nesnesini oluştur
