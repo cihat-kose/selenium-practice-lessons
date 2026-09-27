@@ -1,21 +1,11 @@
+XPath Locator Practice
 
-Techno Study Mentoring Task
-Konu: XPath
+Demo page:
+https://www.selenium.dev/selenium/web/locators_tests/locators.html
 
-- Bu task için sadece XPath kullanınız.
+Use XPath expressions only:
 
-1. https://parabank.parasoft.com/parabank/index.htm adresine gidiniz.
-2. Register butonuna tıklayınız.
-3. First Name alanına {firstName} giriniz.
-4. Last Name alanına {lastName} giriniz.
-5. Address alanına {address} giriniz.
-6. City alanına {city} giriniz.
-7. State alanına {state} giriniz.
-8. Zip Code alanına {zipCode} giriniz.
-9. Phone Number alanına {phoneNumber} giriniz.
-10. SSN alanına {ssn} giriniz.
-11. Username alanına {username} giriniz.
-12. Password alanına {password} giriniz.
-13. Confirm Password alanına {password} giriniz.
-14. Register butonuna tıklayınız.
-15. Başarılı bir şekilde kaydolduğunuzu doğrulayınız.
+1. Find the first-name field by its ID and verify its value is "Jane".
+2. Find the newsletter checkbox by its name and type.
+3. Verify that the checkbox is initially unchecked, click it, then verify that it is selected.
+4. Find the "Selenium Official Page" link by its visible text and verify its URL.

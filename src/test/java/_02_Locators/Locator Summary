@@ -1,0 +1,15 @@
+Tanım
+Bu ders, Selenium'da bir sayfa üzerindeki elementi farklı locator türleriyle bulmayı gösterir.
+
+Selenium Kullanımı
+Test, Selenium'un kendi locator demo sayfasında:
+- "information" class'ı ile First name alanını bulup ID'sinin "fname", değerinin "Jane" olduğunu doğrular.
+- Aynı class'a sahip iki alanı bulur.
+- ID ile Last name alanını bulup değerinin "Doe" olduğunu kontrol eder.
+- name ile Newsletter checkbox'ını bulur.
+- Link text ile Selenium bağlantısını bulup adresini doğrular.
+
+Önemli Noktalar
+- findElement() ilk eşleşen elementi getirir.
+- findElements() eşleşen elementlerin listesini getirir; test iki alan bulduğunu doğrular.
+- Locator, elementi bulmak için kullanılan tanımlayıcıdır.
