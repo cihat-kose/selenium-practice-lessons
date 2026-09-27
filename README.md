@@ -26,8 +26,6 @@ enterprise framework architecture.
 | JUnit | 4.13.2 |
 | Maven Compiler Plugin | 3.16.0 |
 | Maven Surefire Plugin | 3.6.0 |
-| Maven Compiler Plugin | 3.13.0 |
-| Maven Surefire Plugin | 3.2.5 |
 
 ## Repository Structure
 

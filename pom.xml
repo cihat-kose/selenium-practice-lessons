@@ -8,16 +8,16 @@
     <artifactId>selenium-practice-lessons</artifactId>
     <version>1.0-SNAPSHOT</version>
 
+    <properties>
+        <maven.compiler.release>21</maven.compiler.release>
+    </properties>
+
     <dependencies>
         <!-- https://mvnrepository.com/artifact/org.seleniumhq.selenium/selenium-java -->
         <dependency>
             <groupId>org.seleniumhq.selenium</groupId>
             <artifactId>selenium-java</artifactId>
             <version>4.49.0</version>
-
-    <properties>
-        <maven.compiler.release>21</maven.compiler.release>
-    </properties>
         </dependency>
 
         <dependency>
