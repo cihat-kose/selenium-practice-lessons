@@ -1,44 +1,37 @@
-WebDriver BiDi - Konsol Mesajını Adım Adım İzleme
+WebDriver BiDi: Tarayıcıdan Gelen Mesajı Dinlemek
 
-BiDi, Selenium'un tarayıcıya komut göndermesinin yanında tarayıcıdan olay da almasını sağlar.
-Bu örnekte tarayıcıdaki JavaScript console.log() çalışır; Selenium mesajı BiDi olayı olarak yakalar.
+Diyelim ki sayfadaki bir düğmeye bastık ve sayfanın JavaScript'i bir mesaj yazdı. Normal testte çoğunlukla düğmeye basar, sayfada görünen değişikliği kontrol ederiz. BiDi ile tarayıcıya "konsola yeni bir mesaj yazılırsa bana haber ver" de diyebiliriz.
 
-İki test aynı fikri iki sayfada gösterir:
-- receivesConsoleMessageFromLocalFixture: repodaki küçük, kontrol edilebilir HTML sayfası.
-- receivesConsoleMessageFromSeleniumLiveDemo: Selenium projesinin herkese açık canlı demo sayfası.
-Canlı sayfa: https://www.selenium.dev/selenium/web/bidi/logEntryAdded.html
+Bu derste Selenium'un tarayıcısının konsoluna gelen mesajı gerçekten yakalayıp yakalayamadığımızı test ediyoruz.
 
-- Önce BiDi bağlantısı açılır:
-  ChromeOptions üzerinde options.setCapability("webSocketUrl", true) ayarlanır.
-  Chrome başlatıldığında WebDriver bir WebSocket uç noktası açar.
-  Selenium'un BiDi API'si tarayıcı olaylarını bu bağlantıdan alır.
+Test ne yapıyor?
+1. Chrome'u BiDi iletişimi açık olacak şekilde başlatıyor.
+2. Konsol mesajı dinleyicisini, düğmeye basmadan önce kaydediyor.
+3. Sayfada bir düğmeye basıyor. Düğme JavaScript ile console.log(...) çalıştırıyor.
+4. Tarayıcı mesajı gönderince test onu alıyor.
+5. Mesajın beklediğimiz yazı olduğunu kontrol ediyor.
+6. Dinleyiciyi kaldırıp tarayıcıyı kapatıyor.
 
-- Olay dinleyicisi kaydedilir:
-  CompletableFuture<ConsoleLogEntry> consoleEvent = new CompletableFuture<>();
-  String handlerId = remoteDriver.script().addConsoleMessageHandler(consoleEvent::complete);
+İki test aynı şeyi farklı sayfalarda deniyor:
 
-  CompletableFuture, olay daha sonra geldiği için sonucu beklemeye yarayan bir kapsayıcıdır.
-  console::complete callback'i, BiDi konsol olayı geldiğinde bu sonucu tamamlar.
-  handlerId, test sonunda bu dinleyiciyi kaldırmak için saklanır.
+- receivesConsoleMessageFromLocalFixture:
+  Projedeki küçük örnek sayfayı açar. "Write console message" düğmesine basınca
+  "Hello from WebDriver BiDi" mesajı oluşur.
 
-- Olay nasıl üretilir:
-  Yerel testte webdriver-bidi-example.html açılır ve write-console-message düğmesine basılır.
-  Canlı testte Selenium'un logEntryAdded.html sayfası açılır ve consoleLog düğmesine basılır.
-  Her iki düğme de sayfa JavaScript'inde console.log(...) çalıştırır.
-  Yerel sayfa "Hello from WebDriver BiDi", Selenium demosu "Hello, world!" mesajını üretir.
+- receivesConsoleMessageFromSeleniumLiveDemo:
+  Selenium'un canlı eğitim sayfasını açar:
+  https://www.selenium.dev/selenium/web/bidi/logEntryAdded.html
+  "consoleLog" düğmesine basınca "Hello, world!" mesajı oluşur.
+  Bu düğme ve beklenen mesaj Selenium'un kendi BiDi dokümantasyonundaki örnektir.
 
-- Selenium mesajı nasıl bekler ve doğrular:
-  ConsoleLogEntry entry = consoleEvent.get(5, TimeUnit.SECONDS);
-  get(...) olayı en fazla 5 saniye bekler. Olay gelmezse test zaman aşımıyla başarısız olur.
-  assertEquals(expectedText, entry.getText()) olayın içindeki mesajı karşılaştırır.
-  Böylece test yalnızca düğmeye basıldığını değil, tarayıcı olayının gerçekten geldiğini de kanıtlar.
+Kodda geçenler:
+- webSocketUrl: Chrome ile Selenium arasında BiDi bağlantısını açar.
+- addConsoleMessageHandler(...): "Konsol mesajı gelince bu kodu çalıştır" diye dinleyici ekler.
+- CompletableFuture: mesaj hemen gelmediği için testin onu beklemesini sağlar.
+- get(5, TimeUnit.SECONDS): mesaj için en fazla 5 saniye bekler. Mesaj gelmezse test başarısız olur.
+- assertEquals(...): gelen mesajın beklediğimiz yazı olduğunu kontrol eder.
+- removeConsoleMessageHandler(...): işimiz bitince dinleyiciyi kaldırır.
 
-- Handler ve tarayıcı temizliği:
-  finally içinde removeConsoleMessageHandler(handlerId) çağrılır.
-  Bu, test assertion hatası verse bile BiDi dinleyicisini kaldırır.
-  @After içindeki driver.quit() Chrome oturumunu kapatır.
+Kısacası: Biz düğmeye basıyoruz; BiDi tarayıcıda oluşan konsol mesajını testimize getiriyor; test de gelen yazıyı karşılaştırıyor.
 
-- Bu test neyi göstermez:
-  GitHub Actions workflow'u test-compile çalıştırır; tarayıcı açıp bu canlı testi çalıştırmaz.
-  Testin çalışması için Selenium 4.49, BiDi destekli Chrome/ChromeDriver ve internet bağlantısı gerekir.
-  Selenium'un resmi demo sayfası değişebilir veya geçici olarak erişilemeyebilir.
+Canlı test internet ve BiDi destekli Chrome/ChromeDriver gerektirir. GitHub Actions yalnızca Java kodunu derler; tarayıcıyı açıp bu testi çalıştırmaz.
