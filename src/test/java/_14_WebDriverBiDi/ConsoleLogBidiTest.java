@@ -15,8 +15,7 @@ import java.util.concurrent.TimeUnit;
 import static org.junit.Assert.assertEquals;
 
 /**
- * WebDriver BiDi ile tarayıcı konsol olayını dinler ve olay mesajını doğrular.
- * Olayı tetikleyen yerel HTML fixture'ını kullanır.
+ * BiDi üzerinden console.log olayını hem yerel fixture'da hem Selenium'un canlı demosunda dinler.
  */
 public class ConsoleLogBidiTest {
     private ChromeDriver driver;
@@ -25,36 +24,57 @@ public class ConsoleLogBidiTest {
     public void setUp() {
         ChromeOptions options = new ChromeOptions();
 
-        // BiDi olayları için Chrome oturumunda WebSocket uç noktasını etkinleştir.
+        // Tarayıcı ile çift yönlü WebSocket iletişimini aç; BiDi olayları bu kanal üzerinden gelir.
         options.setCapability("webSocketUrl", true);
         driver = new ChromeDriver(options);
     }
 
     @After
     public void tearDown() {
-        // Başarısızlık durumunda da Chrome oturumunun açık kalmasını önle.
+        // Her testten sonra Chrome oturumunu kapat.
         if (driver != null) {
             driver.quit();
         }
     }
 
     @Test
-    public void receivesConsoleMessageAsBrowserEvent() throws Exception {
+    public void receivesConsoleMessageFromLocalFixture() throws Exception {
         RemoteWebDriver remoteDriver = driver;
         CompletableFuture<ConsoleLogEntry> consoleEvent = new CompletableFuture<>();
 
-        // Olay dinleyicisini, mesajı üretecek butona tıklamadan önce kaydet.
-        // Dönüş değerini saklamıyoruz; handler'ın ömrü bu WebDriver oturumuna bağlıdır.
-        remoteDriver.script().addConsoleMessageHandler(consoleEvent::complete);
+        // Olay dinleyicisini, console.log() çağrısından önce kaydet.
+        String handlerId = remoteDriver.script().addConsoleMessageHandler(consoleEvent::complete);
 
-        // Yerel sayfadaki buton JavaScript console.log() çağrısı yapar.
-        driver.get(getClass().getResource("/webdriver-bidi-example.html").toExternalForm());
-        driver.findElement(By.id("write-console-message")).click();
+        try {
+            driver.get(getClass().getResource("/webdriver-bidi-example.html").toExternalForm());
+            driver.findElement(By.id("write-console-message")).click();
 
-        // Asenkron BiDi olayını en fazla 5 saniye bekle; gelmezse test zaman aşımıyla başarısız olur.
-        ConsoleLogEntry entry = consoleEvent.get(5, TimeUnit.SECONDS);
+            // BiDi mesajı callback ile daha sonra gelir; future en fazla 5 saniye bekler.
+            ConsoleLogEntry entry = consoleEvent.get(5, TimeUnit.SECONDS);
+            assertEquals("Hello from WebDriver BiDi", entry.getText());
+        } finally {
+            // Handler kimliğini kullanarak olay aboneliğini kaldır.
+            remoteDriver.script().removeConsoleMessageHandler(handlerId);
+        }
+    }
 
-        // Tarayıcıdan gelen olayın beklenen konsol mesajını taşıdığını doğrula.
-        assertEquals("Hello from WebDriver BiDi", entry.getText());
+    @Test
+    public void receivesConsoleMessageFromSeleniumLiveDemo() throws Exception {
+        RemoteWebDriver remoteDriver = driver;
+        CompletableFuture<ConsoleLogEntry> consoleEvent = new CompletableFuture<>();
+
+        // Dinleyici tıklamadan önce açık olmalı; aksi halde kısa ömürlü olayı kaçırabiliriz.
+        String handlerId = remoteDriver.script().addConsoleMessageHandler(consoleEvent::complete);
+
+        try {
+            // Selenium'un canlı demo sayfasındaki consoleLog düğmesi "Hello, world!" üretir.
+            driver.get("https://www.selenium.dev/selenium/web/bidi/logEntryAdded.html");
+            driver.findElement(By.id("consoleLog")).click();
+
+            ConsoleLogEntry entry = consoleEvent.get(5, TimeUnit.SECONDS);
+            assertEquals("Hello, world!", entry.getText());
+        } finally {
+            remoteDriver.script().removeConsoleMessageHandler(handlerId);
+        }
     }
 }

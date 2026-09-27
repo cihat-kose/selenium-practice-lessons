@@ -1,27 +1,44 @@
-WebDriver BiDi - Console Events
+WebDriver BiDi - Konsol Mesajını Adım Adım İzleme
 
-- Tanım:
-  WebDriver BiDi, WebDriver ile tarayıcı arasında çift yönlü ve olay temelli iletişim sağlar.
-  Bu ders, tarayıcı konsolundaki bir mesajı BiDi olayı olarak dinleyip doğrular.
+BiDi, Selenium'un tarayıcıya komut göndermesinin yanında tarayıcıdan olay da almasını sağlar.
+Bu örnekte tarayıcıdaki JavaScript console.log() çalışır; Selenium mesajı BiDi olayı olarak yakalar.
 
-- Testin Akışı:
-  ConsoleLogBidiTest Chrome oturumu açarken webSocketUrl capability'sini etkinleştirir.
-  Konsol olay dinleyicisini etkileşimden önce kaydeder.
-  Yerel webdriver-bidi-example.html fixture'ındaki butona tıklar.
-  Buton JavaScript console.log() çağrısı yapar; mesaj tarayıcıdan BiDi olayı olarak gelir.
-  CompletableFuture ile olayı en fazla 5 saniye bekler ve metni assertEquals ile doğrular.
-  @After metodu Chrome oturumunu kapatır.
+İki test aynı fikri iki sayfada gösterir:
+- receivesConsoleMessageFromLocalFixture: repodaki küçük, kontrol edilebilir HTML sayfası.
+- receivesConsoleMessageFromSeleniumLiveDemo: Selenium projesinin herkese açık canlı demo sayfası.
+Canlı sayfa: https://www.selenium.dev/selenium/web/bidi/logEntryAdded.html
 
-- Selenium Kullanımı:
-  WebDriver BiDi için ChromeOptions üzerinde WebSocket uç noktası istenir:
-  options.setCapability("webSocketUrl", true);
+- Önce BiDi bağlantısı açılır:
+  ChromeOptions üzerinde options.setCapability("webSocketUrl", true) ayarlanır.
+  Chrome başlatıldığında WebDriver bir WebSocket uç noktası açar.
+  Selenium'un BiDi API'si tarayıcı olaylarını bu bağlantıdan alır.
 
-  Konsol olayı dinleyicisi kaydedilir:
-  CompletableFuture<ConsoleLogEntry> event = new CompletableFuture<>();
-  remoteDriver.script().addConsoleMessageHandler(event::complete);
+- Olay dinleyicisi kaydedilir:
+  CompletableFuture<ConsoleLogEntry> consoleEvent = new CompletableFuture<>();
+  String handlerId = remoteDriver.script().addConsoleMessageHandler(consoleEvent::complete);
 
-- Önemli Noktalar:
-  Dinleyici olay tetiklenmeden önce kaydedilmelidir; aksi halde olay kaçırılabilir.
-  CompletableFuture.get(5, TimeUnit.SECONDS) asenkron olayı bekler ve sonsuz beklemeyi önler.
-  Test Chrome ve BiDi uyumlu ChromeDriver gerektirir; CI'daki test-compile yalnızca derlemeyi doğrular.
-  Test public bir siteye bağlı değildir; fixture src/test/resources/webdriver-bidi-example.html dosyasındadır.
+  CompletableFuture, olay daha sonra geldiği için sonucu beklemeye yarayan bir kapsayıcıdır.
+  console::complete callback'i, BiDi konsol olayı geldiğinde bu sonucu tamamlar.
+  handlerId, test sonunda bu dinleyiciyi kaldırmak için saklanır.
+
+- Olay nasıl üretilir:
+  Yerel testte webdriver-bidi-example.html açılır ve write-console-message düğmesine basılır.
+  Canlı testte Selenium'un logEntryAdded.html sayfası açılır ve consoleLog düğmesine basılır.
+  Her iki düğme de sayfa JavaScript'inde console.log(...) çalıştırır.
+  Yerel sayfa "Hello from WebDriver BiDi", Selenium demosu "Hello, world!" mesajını üretir.
+
+- Selenium mesajı nasıl bekler ve doğrular:
+  ConsoleLogEntry entry = consoleEvent.get(5, TimeUnit.SECONDS);
+  get(...) olayı en fazla 5 saniye bekler. Olay gelmezse test zaman aşımıyla başarısız olur.
+  assertEquals(expectedText, entry.getText()) olayın içindeki mesajı karşılaştırır.
+  Böylece test yalnızca düğmeye basıldığını değil, tarayıcı olayının gerçekten geldiğini de kanıtlar.
+
+- Handler ve tarayıcı temizliği:
+  finally içinde removeConsoleMessageHandler(handlerId) çağrılır.
+  Bu, test assertion hatası verse bile BiDi dinleyicisini kaldırır.
+  @After içindeki driver.quit() Chrome oturumunu kapatır.
+
+- Bu test neyi göstermez:
+  GitHub Actions workflow'u test-compile çalıştırır; tarayıcı açıp bu canlı testi çalıştırmaz.
+  Testin çalışması için Selenium 4.49, BiDi destekli Chrome/ChromeDriver ve internet bağlantısı gerekir.
+  Selenium'un resmi demo sayfası değişebilir veya geçici olarak erişilemeyebilir.

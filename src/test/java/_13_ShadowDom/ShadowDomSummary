@@ -1,24 +1,57 @@
-Shadow DOM
+Shadow DOM - Adım Adım
 
-- Tanım:
-  Shadow DOM, bir web component'in HTML ve stil içeriğini sayfanın geri kalanından ayıran DOM ağacıdır.
-  Bu örnekte <consent-panel> web component'i shadow host, onun içindeki ağaç ise Shadow DOM'dur.
+Bu klasörde üç ayrı durum gösteriliyor. İlk ikisi gerçek Shadow DOM kullanıyor; üçüncüsü yalnızca özel görünümlü bir HTML component'i.
 
-- Testin Akışı:
-  ShadowDomExampleTest yerel shadow-dom-example.html fixture'ını açar.
-  consent-panel host element'inin sayfaya gelmesini explicit wait ile bekler.
-  WebElement.getShadowRoot() ile host'un açık Shadow Root'una erişir.
-  #accept-all butonuna Shadow Root içinden tıklar.
-  #result alanında "Consent accepted" metnini bekler ve doğrular.
+1. Yerel örnek: ShadowDomExampleTest
 
-- Selenium Kullanımı:
-  WebElement.getShadowRoot() bir SearchContext döndürür.
-  Shadow DOM içindeki elementler bu kökte findElement() ile aranır:
-  SearchContext shadowRoot = shadowHost.getShadowRoot();
-  WebElement button = shadowRoot.findElement(By.cssSelector("#accept-all"));
+- Tarayıcı / sayfa:
+  Test, projedeki src/test/resources/shadow-dom-example.html dosyasını açar.
+  Sayfada <consent-panel> adında bir web component vardır. Bu element Shadow DOM'un host'u, yani dışarıdan görünen sahibidir.
 
-- Önemli Noktalar:
-  driver.findElement() ile yapılan normal arama Shadow DOM sınırının içine geçmez.
-  Önce host bulunur, ardından Shadow Root alınır ve iç arama bu kökte yapılır.
-  Örnek açık (open) Shadow DOM kullanır; kapalı (closed) Shadow Root bu şekilde dışarıdan aranamaz.
-  Test public bir siteye bağlı değildir; fixture src/test/resources/shadow-dom-example.html dosyasındadır.
+- Testte sırayla ne olur:
+  1) driver.get(...) yerel HTML dosyasını açar.
+  2) wait.until(...) consent-panel elementinin sayfaya gelmesini bekler.
+  3) shadowHost.getShadowRoot() host'un açık Shadow Root'unu verir.
+  4) shadowRoot.findElement(...) yalnızca Shadow Root içindeki #accept-all butonunu arar.
+  5) click() butona basar; fixture içindeki JavaScript #result alanına "Consent accepted" yazar.
+  6) Son wait bu alanı bulur, assertEquals görünen metnin beklenen metin olduğunu doğrular.
+
+2. Canlı örnek: AkakceConsentShadowDomTest
+
+- Tarayıcı / sayfa:
+  Test https://www.akakce.com/ sayfasını açar. Sayfanın çerez arayüzü efilli-layout-tuttur sınıfına sahip bir host içinde gösterilir.
+
+- Testte sırayla ne olur:
+  1) Explicit wait çerez host'unun yüklenmesini bekler.
+  2) getShadowRoot() host'un native, açık Shadow Root'una erişir.
+  3) Shadow Root içinde data-name="kabul et" olan onay element'i aranır.
+  4) Element görünür ve etkin olana kadar beklenip tıklanır.
+  5) invisibilityOf(...) onay element'inin kaybolmasını bekler; assertTrue bu sonucu doğrular.
+
+3. Native olmayan örnek: NonNativeCustomElementTest
+
+- Tarayıcı / sayfa:
+  Test, Era giriş sayfasındaki <dxbl-input-editor> özel element'ini bulur.
+
+- Neden bu örnek farklı:
+  Özel HTML elementi kullanmak otomatik olarak Shadow DOM olduğu anlamına gelmez.
+  Bu sayfada input, component'in normal DOM alt elementidir; ayrı bir Shadow Root yoktur.
+
+- Testte sırayla ne olur:
+  1) wait.until(...) dxbl-input-editor element'ini bulur.
+  2) getShadowRoot() çağrısının NoSuchShadowRootException verdiği doğrulanır.
+  3) customInput.findElement(By.cssSelector("input")) ile içindeki input normal şekilde aranır.
+  4) Input tıklanabilir olana kadar beklenir, "username" metni yazılır.
+  5) assertEquals input'un value niteliğinin "username" olduğunu doğrular.
+
+- Kullanılan Selenium kavramları:
+  WebElement: sayfadaki bir HTML element'ini temsil eder.
+  Shadow host: Shadow DOM'u barındıran dış element'tir.
+  SearchContext: findElement() araması yapılabilen driver, element veya Shadow Root'tur.
+  getShadowRoot(): yalnızca gerçek ve erişilebilir (open) Shadow Root varsa SearchContext döndürür.
+  NoSuchShadowRootException: bulunan element'in native Shadow Root'u olmadığında oluşur.
+  Explicit wait: element hazır olana kadar bekler; sabit süreli Thread.sleep yerine koşulu bekler.
+
+- Dikkat:
+  Yerel örnek dış siteye bağlı olmadığı için en kararlı öğrenme/test örneğidir.
+  Akakçe ve Era giriş sayfası canlı sitelerdir; HTML, çerez penceresi veya erişim şartları değişirse test güncellenmelidir.

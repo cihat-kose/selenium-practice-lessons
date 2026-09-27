@@ -91,6 +91,8 @@
                         <include>**/_12_RobotClass/FileUploadWithRobot.java</include>
                         <include>**/_12_RobotClass/FileUploadWithWebDriverLetcode.java</include>
                         <include>**/_13_ShadowDom/ShadowDomExampleTest.java</include>
+                        <include>**/_13_ShadowDom/AkakceConsentShadowDomTest.java</include>
+                        <include>**/_13_ShadowDom/NonNativeCustomElementTest.java</include>
                         <include>**/_14_WebDriverBiDi/ConsoleLogBidiTest.java</include>
                     </includes>
                 </configuration>

@@ -67,8 +67,8 @@ existing iframe and file-upload fixtures remain part of the project.
 - Windows and tabs
 - File uploads
 - OS-level interaction with the Java `Robot` class
-- Selenium 4 Shadow DOM access through `WebElement.getShadowRoot()`
-- WebDriver BiDi console-event listening over the browser WebSocket connection
+- Selenium 4 native and non-native Shadow DOM examples, including a live consent dialog
+- WebDriver BiDi console-event listening on a live Selenium demo and a local fixture
 
 ## Setup
 
@@ -111,9 +111,12 @@ This starts a browser and runs one lesson class. Browser examples may depend on
 live/demo websites, network availability, and the current behavior of those sites.
 Running the complete suite is therefore not equivalent to a stable CI test suite.
 
-The Shadow DOM and WebDriver BiDi lessons use local HTML fixtures. The BiDi
-lesson enables Selenium's `webSocketUrl` capability and requires a compatible
-local Chrome and ChromeDriver.
+The basic Shadow DOM lesson and one BiDi lesson use local HTML fixtures.
+Additional Shadow DOM lessons demonstrate a live consent dialog and a custom
+input without a native Shadow Root. Another BiDi lesson uses Selenium's live
+console-logging demo. BiDi enables Selenium's `webSocketUrl` capability and
+requires a compatible local Chrome and ChromeDriver. Live examples need internet
+access and can be affected by changes to the external sites.
 
 ### Run every lesson test
 
