@@ -8,6 +8,8 @@ import utility.BaseDriver;
 
 import java.util.List;
 
+import static org.junit.Assert.assertTrue;
+
 public class IframeHandlingTests extends BaseDriver {
 
     /**
@@ -18,25 +20,19 @@ public class IframeHandlingTests extends BaseDriver {
      */
     @Test
     public void printIframeCount() {
-        // 1. Adım: Web sitesine git
         driver.get("https://demoqa.com/frames");
 
-        // 2. Adım: Eğer varsa çerez uyarısını kapatın
         List<WebElement> consent = driver.findElements(By.xpath("//button[@class='fc-button fc-cta-consent fc-primary-button']//p"));
         if (!consent.isEmpty()) {
             consent.get(0).click();
         }
 
-        // 3. Adım: Iframe'lerin yüklenmesini bekleyin
-        wait.until(ExpectedConditions.presenceOfAllElementsLocatedBy(By.tagName("iframe")));
-
-        // 4. Adım: Sayfadaki iframe'leri bulun
+        wait.until(ExpectedConditions.numberOfElementsToBeMoreThan(By.tagName("iframe"), 1));
         List<WebElement> iframes = driver.findElements(By.tagName("iframe"));
 
-        // 5. Adım: Iframe sayısını ekrana yazdırın
         System.out.println("Sayfadaki iframe sayısı: " + iframes.size());
+        assertTrue("DemoQA sayfasında en az iki iframe bekleniyordu.", iframes.size() >= 2);
 
-        // 6. Adım: Test tamamlandıktan sonra tarayıcıyı kapatın
         waitAndClose();
     }
 
@@ -48,24 +44,23 @@ public class IframeHandlingTests extends BaseDriver {
      */
     @Test
     public void printIframeText() {
-        // 1. Adım: Web sitesine git
         driver.get("https://demoqa.com/frames");
 
-        // 2. Adım: Eğer varsa çerez uyarısını kapatın
         List<WebElement> consent = driver.findElements(By.xpath("//button[@class='fc-button fc-cta-consent fc-primary-button']//p"));
         if (!consent.isEmpty()) {
             consent.get(0).click();
         }
 
-        // 3. Adım: Iframe'e geçiş yap (id kullanarak)
-        WebElement iframe = driver.findElement(By.id("frame1"));
-        driver.switchTo().frame(iframe);  // WebElement ile iframe'e geçiş
+        WebElement iframe = wait.until(
+                ExpectedConditions.presenceOfElementLocated(By.id("frame1")));
+        driver.switchTo().frame(iframe);
 
-        // 4. Adım: Iframe içindeki "This is a sample page" metnini bul ve ekrana yazdır
-        WebElement text = driver.findElement(By.id("sampleHeading"));
+        WebElement text = wait.until(
+                ExpectedConditions.visibilityOfElementLocated(By.id("sampleHeading")));
+        assertTrue("Iframe metni beklenen içeriği taşımıyor.",
+                text.getText().contains("This is a sample page"));
         System.out.println("Iframe içindeki metin: " + text.getText());
 
-        // 5. Adım: Test tamamlandıktan sonra tarayıcıyı kapatın
         waitAndClose();
     }
 }

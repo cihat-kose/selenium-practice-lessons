@@ -1,0 +1,27 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Shadow DOM practice fixture</title>
+</head>
+<body>
+<consent-panel></consent-panel>
+<script>
+    class ConsentPanel extends HTMLElement {
+        constructor() {
+            super();
+            const root = this.attachShadow({mode: "open"});
+            root.innerHTML = `
+                <button id="accept-all" type="button">Accept All</button>
+                <p id="result" aria-live="polite"></p>
+            `;
+            root.querySelector("#accept-all").addEventListener("click", () => {
+                root.querySelector("#result").textContent = "Consent accepted";
+            });
+        }
+    }
+
+    customElements.define("consent-panel", ConsentPanel);
+</script>
+</body>
+</html>

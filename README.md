@@ -22,8 +22,10 @@ enterprise framework architecture.
 | Java | 21 |
 | Maven Wrapper | 3.3.4 |
 | Maven | 3.9.11 |
-| Selenium Java | 4.35.0 |
+| Selenium Java | 4.49.0 |
 | JUnit | 4.13.2 |
+| Maven Compiler Plugin | 3.16.0 |
+| Maven Surefire Plugin | 3.6.0 |
 | Maven Compiler Plugin | 3.13.0 |
 | Maven Surefire Plugin | 3.2.5 |
 
@@ -45,11 +47,14 @@ src/test/java/
 ├── _10_Scroll/
 ├── _11_Windows/
 ├── _12_RobotClass/
+├── _13_ShadowDom/
+├── _13_WebDriverBiDi/
 └── utility/
 ```
 
 `Task` and `Summary` files are educational notes that accompany the lesson
-examples.
+examples. Local HTML and upload fixtures are kept in `src/test/resources/`; the
+existing iframe and file-upload fixtures remain part of the project.
 
 ## Lessons and Topics
 
@@ -64,6 +69,8 @@ examples.
 - Windows and tabs
 - File uploads
 - OS-level interaction with the Java `Robot` class
+- Selenium 4 Shadow DOM access through `WebElement.getShadowRoot()`
+- WebDriver BiDi console-event listening over the browser WebSocket connection
 
 ## Setup
 
@@ -105,6 +112,10 @@ Windows PowerShell:
 This starts a browser and runs one lesson class. Browser examples may depend on
 live/demo websites, network availability, and the current behavior of those sites.
 Running the complete suite is therefore not equivalent to a stable CI test suite.
+
+The Shadow DOM and WebDriver BiDi lessons use local HTML fixtures. The BiDi
+lesson enables Selenium's `webSocketUrl` capability and requires a compatible
+local Chrome and ChromeDriver.
 
 ### Run every lesson test
 
@@ -167,6 +178,7 @@ the desktop/Robot examples.
 - Browser examples require network access and a compatible local browser setup.
 - Examples use visible browser interaction rather than a CI-oriented headless design.
 - Robot examples depend on desktop and operating-system behavior.
+- WebDriver BiDi support depends on the installed browser and driver versions.
 - Some examples intentionally use simple or hard-coded educational data.
 
 ## Contributors
