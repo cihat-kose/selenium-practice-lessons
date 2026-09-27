@@ -12,9 +12,9 @@ import java.awt.datatransfer.StringSelection;
 import java.awt.event.KeyEvent;
 
 /**
- * Bu test, https://letcode.in/file sitesinde
+ * Bu test, https://letcode.in/file adresinde
  * Java Robot sınıfını kullanarak dosya yükleme otomasyonunu gösterir.
- * Dosya seçme penceresi, klavye girişleri (TAB, ENTER, CTRL+V, ENTER)
+ * Dosya seçme penceresi, klavye girişleri (TAB, ENTER ve CTRL+V gibi klavye girişleri.)
  * simüle edilerek yönetilir.
  */
 

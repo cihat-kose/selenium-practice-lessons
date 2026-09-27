@@ -44,7 +44,7 @@ public class ActionChainsClass extends BaseDriver {
 
         // 2. yöntem
         actions.moveToElement(rightClickButton) // elementin üstüne hoverover yapmaya yarıyor
-                .contextClick(rightClickButton) // elemente sağ click yapamaya yarıyor
+                .contextClick(rightClickButton) // elemente sağ click yapmaya yarıyor
                 .perform();
 
         // 5- sağ tıklama sonrası açılan context menüden "Copy" seçeneğini bul ve tıkla

@@ -21,7 +21,7 @@ Bu görevde, Selenium WebDriver kullanarak gerçek bir web sitesi üzerinden kul
 7. Tarayıcıyı kapatın.
 
 💡 İpuçları:
-- Her bir input alanına erişim için id, name, class, cssSelector, xPath gibi uygun locator stratejilerini kullanabilirsiniz.
+- Her bir input alanına erişim için id, name, class, CSS selector, XPath gibi uygun locator stratejilerini kullanabilirsiniz.
 - Her çalıştırmada yeni bir e-posta adresi kullanmanız gerekebilir, aksi takdirde “email already registered” hatası alabilirsiniz.
 
 ✅ Ekstra Gereklilik (Opsiyonel):

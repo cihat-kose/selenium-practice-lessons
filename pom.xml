@@ -8,12 +8,16 @@
     <artifactId>selenium-practice-lessons</artifactId>
     <version>1.0-SNAPSHOT</version>
 
+    <properties>
+        <maven.compiler.release>21</maven.compiler.release>
+    </properties>
+
     <dependencies>
         <!-- https://mvnrepository.com/artifact/org.seleniumhq.selenium/selenium-java -->
         <dependency>
             <groupId>org.seleniumhq.selenium</groupId>
             <artifactId>selenium-java</artifactId>
-            <version>4.35.0</version>
+            <version>4.49.0</version>
         </dependency>
 
         <dependency>
@@ -22,26 +26,54 @@
             <version>4.13.2</version>
         </dependency>
 
-        <!-- https://mvnrepository.com/artifact/com.fasterxml.jackson.core/jackson-databind -->
-        <dependency>
-            <groupId>com.fasterxml.jackson.core</groupId>
-            <artifactId>jackson-databind</artifactId>
-            <version>2.20.0</version>
-        </dependency>
-
-        <!-- https://mvnrepository.com/artifact/com.fasterxml.jackson.datatype/jackson-datatype-jsr310 -->
-        <dependency>
-            <groupId>com.fasterxml.jackson.datatype</groupId>
-            <artifactId>jackson-datatype-jsr310</artifactId>
-            <version>2.20.0</version>
-        </dependency>
-
-        <!-- https://mvnrepository.com/artifact/io.github.testervippro/record-video -->
-        <dependency>
-            <groupId>io.github.testervippro</groupId>
-            <artifactId>record-video</artifactId>
-            <version>2.1</version>
-        </dependency>
     </dependencies>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>3.16.0</version>
+                <configuration>
+                    <release>21</release>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-surefire-plugin</artifactId>
+                <version>3.6.0</version>
+                <configuration>
+                    <includes>
+                        <include>**/_01_SeleniumIntro/NinjaRegisterTest.java</include>
+                        <include>**/_02_Locators/LocatorStrategiesExample.java</include>
+                        <include>**/_03_CssSelector/CssSelectorTask.java</include>
+                        <include>**/_04_XPath/XPathLocatorTask.java</include>
+                        <include>**/_05_Select_ElementInStatus/SelectDropdownAllMethodsTask.java</include>
+                        <include>**/_06_Actions/ActionChainsClass.java</include>
+                        <include>**/_06_Actions/GoogleActionsExample.java</include>
+                        <include>**/_06_Actions/KeyboardActionsClass.java</include>
+                        <include>**/_06_Actions/MouseActionsClass.java</include>
+                        <include>**/_07_Alerts/DemoQAAlertWaitExample.java</include>
+                        <include>**/_07_Alerts/Guru99AlertTest.java</include>
+                        <include>**/_07_Alerts/TheInternetHerokuappAlertExamples.java</include>
+                        <include>**/_08_Waits/AlertHandlingTest.java</include>
+                        <include>**/_08_Waits/DynamicLoadingTest.java</include>
+                        <include>**/_08_Waits/FluentWaitExampleJUnit.java</include>
+                        <include>**/_08_Waits/GoogleExplicitWaitExample.java</include>
+                        <include>**/_08_Waits/ImplicitWaitExample.java</include>
+                        <include>**/_09_IFrames/IframeHandlingTests.java</include>
+                        <include>**/_09_IFrames/IframeTextAreaTest.java</include>
+                        <include>**/_10_Scroll/InfiniteScrollTest.java</include>
+                        <include>**/_10_Scroll/ScrollPageAfterLoginTest.java</include>
+                        <include>**/_11_Windows/NewTabWindowTest.java</include>
+                        <include>**/_12_RobotClass/CrossPlatformTextEditorTest.java</include>
+                        <include>**/_12_RobotClass/DuckduckgoSearchWithRobotClass.java</include>
+                        <include>**/_12_RobotClass/FileUploadWithRobot.java</include>
+                        <include>**/_12_RobotClass/FileUploadWithRobotLetcode.java</include>
+                    </includes>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
 
 </project>

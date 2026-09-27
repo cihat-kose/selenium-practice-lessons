@@ -1,118 +1,168 @@
 # Selenium Practice Lessons
 
-![Java](https://img.shields.io/badge/Java-ED8B00?style=for-the-badge&logo=java&logoColor=white)
-![Selenium](https://img.shields.io/badge/Selenium-43B02A?style=for-the-badge&logo=selenium&logoColor=white)
-![JUnit](https://img.shields.io/badge/JUnit-25A162?style=for-the-badge&logo=junit&logoColor=white)
+![Java](https://img.shields.io/badge/Java-21-ED8B00?style=for-the-badge&logo=openjdk&logoColor=white)
+![Selenium](https://img.shields.io/badge/Selenium-4.49.0-43B02A?style=for-the-badge&logo=selenium&logoColor=white)
+![JUnit](https://img.shields.io/badge/JUnit-4.13.2-25A162?style=for-the-badge&logo=junit&logoColor=white)
 ![GitHub last commit](https://img.shields.io/github/last-commit/cihat-kose/selenium-practice-lessons?style=for-the-badge)
 
-## 💡 Introduction
-Welcome to the **selenium-practice-lessons** repository! This project is designed for practical learning and hands-on exercises in UI test automation using Selenium. It’s ideal for those who want to strengthen their Selenium skills through real-world test scenarios.
+## Introduction
 
-## Table of Contents
-- [Introduction](#-introduction)
-- [Installation](#-installation)
-- [Usage](#-usage)
-- [Features](#-features)
-- [Dependencies](#-dependencies)
-- [Documentation](#-documentation)
-- [Examples](#-examples)
-- [Troubleshooting](#-troubleshooting)
-- [Contributors](#-contributors)
-- [Contributing](#-contributing)
-- [License](#-license)
+This repository contains hands-on Selenium WebDriver practice examples written in
+Java and JUnit 4. The lessons demonstrate common UI automation techniques through
+small, focused examples using public and demo websites.
 
-## 📥 Installation
+This is an **educational practice repository**, not a production-ready automation
+framework. The examples intentionally favor clarity and experimentation over
+enterprise framework architecture.
 
-1. Open IntelliJ IDEA.
-2. Select **File > New > Project from Version Control**.
-3. Enter the repository URL: `https://github.com/cihat-kose/selenium-practice-lessons.git` and click **Clone**.
-4. Wait for Maven to automatically download all dependencies.
-5. Verify that **Project SDK** is set to **Java 21** (or newer):
-- Go to **File → Project Structure → Project**
-- Set **Project SDK** and **Language level** appropriately.
-6. To confirm everything works, open the Maven panel and run: 
-    ```bash
-    mvn clean test
-    ```
-💡 *No manual JAR management is needed anymore — all dependencies are managed via Maven.*
+## Technology Stack
 
-## ⚙️ Usage
-1. Open the project in IntelliJ IDEA.
-2. Navigate to the `src/test/java` directory.
-3. Run individual test classes or the entire test suite using:
-    - Right-click on a test class and select **Run 'ClassName'**.
-    - Or use the Maven command: 
-    ```bash
-    mvn clean test
-    ```
-4. Modify or add new tests to explore different Selenium use cases.
+| Technology | Version |
+| --- | --- |
+| Java | 21 |
+| Maven Wrapper | 3.3.4 |
+| Maven | 3.9.11 |
+| Selenium Java | 4.49.0 |
+| JUnit | 4.13.2 |
+| Maven Compiler Plugin | 3.16.0 |
+| Maven Surefire Plugin | 3.6.0 |
 
+## Repository Structure
 
-## ✨ Features
-- Structured **Maven** project for easy dependency management.
-- Focused practice modules on essential Selenium skills.
-- Hands-on test cases covering real-world UI elements and flows.
-- Easy-to-understand structure for beginners and intermediate learners.
-- Demonstrates common **UI automation techniques** and patterns.
+The project uses the standard Maven test-source layout:
 
-## 📦 Dependencies
-Managed automatically through `pom.xml`:
+```text
+src/test/java/
+├── _01_SeleniumIntro/
+├── _02_Locators/
+├── _03_CssSelector/
+├── _04_XPath/
+├── _05_Select_ElementInStatus/
+├── _06_Actions/
+├── _07_Alerts/
+├── _08_Waits/
+├── _09_IFrames/
+├── _10_Scroll/
+├── _11_Windows/
+├── _12_RobotClass/
+└── utility/
+```
 
-| Dependency | Version | Purpose |
-|-------------|----------|----------|
-| `org.seleniumhq.selenium:selenium-java` | 4.35.0 | Core Selenium WebDriver |
-| `junit:junit` | 4.13.2 | Test framework |
-| `com.fasterxml.jackson.core:jackson-databind` | 2.20.0 | JSON processing |
-| `com.fasterxml.jackson.datatype:jackson-datatype-jsr310` | 2.20.0 | Java 8+ date/time JSON support |
-| `io.github.testervippro:record-video` | 2.1 | Record test execution videos |
+`Task` and `Summary` files are educational notes that accompany the lesson
+examples.
 
-## 📚 Documentation
-Each test file includes inline documentation explaining the scenario and Selenium functions being used.
+## Lessons and Topics
 
-## 💡 Examples
+- Selenium introduction and registration flow
+- Locator strategies, CSS selectors, and XPath
+- Select/dropdown handling
+- Actions, keyboard, and mouse interactions
+- JavaScript alerts
+- Implicit, explicit, and fluent waits
+- iFrames
+- Scrolling
+- Windows and tabs
+- File uploads
+- OS-level interaction with the Java `Robot` class
 
-### Core Selenium Techniques
-- **Locating Elements**: Practice using ID, name, class, CSS Selector, and XPath.
-- **Interaction Methods**: Perform clicks, typing, selections, and submissions.
+## Setup
 
-### User Interaction
-- **Action Class Examples**: Hovering, drag-and-drop, and composite actions.
-- **Keyboard/Mouse Control**: Using Robot class for OS-level control.
+Prerequisites:
 
-### Wait Strategies
-- **Explicit Waits**: Synchronize your tests with slow-loading elements.
-- **Implicit Waits**: Set global wait defaults for driver operations.
+- Java 21
+- A local Maven-compatible environment using the included Maven Wrapper
+- Google Chrome for browser examples
+- Internet access for the public/demo websites used by the lessons
 
-### Multi-Context Handling
-- **iFrames**: Switch to frames and interact with inner elements.
-- **Window/Tab Management**: Handle multiple browser tabs or pop-ups.
+Clone the repository and use the Maven Wrapper as the preferred build entry point.
+No manual JAR management is required.
 
-### Extra Scenarios
-- **File Upload**: Handle file dialogs using both Selenium and Robot.
-- **Scrolling Techniques**: Scroll into view or to the bottom of the page.
+### Compile the lesson sources
 
-## 🛠️ Troubleshooting
-If you experience any issues:
+Windows PowerShell:
 
-- Make sure Maven dependencies are correctly downloaded (mvn clean install -U).
-- Check that your browser drivers (e.g., ChromeDriver) are up-to-date.
-- Ensure that your Project SDK is set correctly in IntelliJ.
-- Review test logs and console output to identify failures.
-- Still stuck? [Open an issue on GitHub](https://github.com/cihat-kose/selenium-practice-lessons/issues) and describe your problem in detail.
+```powershell
+.\mvnw.cmd test-compile
+```
 
-## 👥 Contributors
-- [cihat-kose](https://github.com/cihat-kose) – Cihat Köse  
+macOS/Linux:
+
+```bash
+./mvnw test-compile
+```
+
+`test-compile` is the safe build validation command. It compiles the Java test
+sources but does not launch browsers or execute Selenium tests.
+
+### Run one lesson
+
+Windows PowerShell:
+
+```powershell
+.\mvnw.cmd "-Dtest=_02_Locators.LocatorStrategiesExample" test
+```
+
+This starts a browser and runs one lesson class. Browser examples may depend on
+live/demo websites, network availability, and the current behavior of those sites.
+Running the complete suite is therefore not equivalent to a stable CI test suite.
+
+## Browser Driver and Lifecycle
+
+The current Selenium setup does not require a manually configured ChromeDriver
+path. Selenium Manager handles driver resolution for the local browser
+environment. Browser compatibility is not universal, and startup can still be
+affected by the installed browser, operating system, or local environment.
+
+`utility.BaseDriver` provides the educational browser lifecycle:
+
+- `@Before` creates a fresh browser for each test.
+- `@After` guarantees cleanup when a test fails or does not close the browser itself.
+- `waitAndClose()` is intentionally retained in lesson examples.
+- Its short three-second delay lets students observe the result before the browser
+  closes.
+
+These mechanisms serve different educational purposes and intentionally coexist.
+
+## GitHub Actions
+
+GitHub Actions provides build validation through
+`.github/workflows/build.yml`. The workflow:
+
+- uses Java 21,
+- uses the repository Maven Wrapper,
+- runs `./mvnw -B -ntp test-compile`, and
+- validates test-source compilation only.
+
+The CI workflow does not run the live Selenium suite, launch browsers, or execute
+the desktop/Robot examples.
+
+## Known Limitations
+
+- External and demo websites can change or become unavailable.
+- Browser examples require network access and a compatible local browser setup.
+- Examples use visible browser interaction rather than a CI-oriented headless design.
+- Robot examples depend on desktop and operating-system behavior.
+- Some examples intentionally use simple or hard-coded educational data.
+
+## Contributors
+
+- [cihat-kose](https://github.com/cihat-kose) – Cihat Köse
 - [SefaKahramann](https://github.com/SefaKahramann) – Sefa Kahraman
 
-## 🤝 Contributing
+## Contributing
+
 Contributions are welcome! Please follow these steps:
+
 1. Fork the repository.
 2. Create a new branch (`git checkout -b feature-branch`).
 3. Commit your changes (`git commit -m 'Add new feature'`).
 4. Push to the branch (`git push origin feature-branch`).
 5. Create a Pull Request.
 
-## 📜 License
-This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for details.
+## License
 
-For more info, visit the [selenium-practice-lessons GitHub page](https://github.com/cihat-kose/selenium-practice-lessons).
+This project is licensed under the MIT License. See the [LICENSE](LICENSE) file
+for details.
+
+For more information, visit the
+[selenium-practice-lessons GitHub page](https://github.com/cihat-kose/selenium-practice-lessons).

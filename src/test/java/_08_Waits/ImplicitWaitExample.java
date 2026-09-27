@@ -4,13 +4,11 @@ import org.junit.Assert;
 import org.junit.Test;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
+import utility.BaseDriver;
 
 import java.time.Duration;
 
-import static utility.BaseDriver.driver;
-import static utility.BaseDriver.waitAndClose;
-
-public class ImplicitWaitExample {
+public class ImplicitWaitExample extends BaseDriver {
 
     /**
      Task:

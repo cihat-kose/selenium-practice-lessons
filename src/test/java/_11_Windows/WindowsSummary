@@ -3,7 +3,7 @@
 
 - Tanım:
   Selenium ile birden fazla tarayıcı penceresi veya sekmesi açıldığında, farklı pencereler arasında geçiş yapılabilir.
-  Her bir pencere, Selenium tarafından unique bir pencere ID'si (Window Handle) ile tanımlanır.
+  Her bir pencere, Selenium tarafından benzersiz bir pencere kimliği (window handle) ile tanımlanır.
 
 - Selenium Kullanımı:
   Mevcut aktif pencerenin ID'si driver.getWindowHandle() metodu ile alınır.
