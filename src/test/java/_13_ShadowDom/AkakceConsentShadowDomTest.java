@@ -21,7 +21,8 @@ public class AkakceConsentShadowDomTest extends BaseDriver {
 
         // Çerez arayüzü yüklenene kadar Shadow DOM host'unu bekle.
         WebElement shadowHost = wait.until(
-                ExpectedConditions.presenceOfElementLocated(By.className("efilli-layout-tuttur")));
+                ExpectedConditions.presenceOfElementLocated(
+                        By.cssSelector("efilli-layout-dynamic")));
 
         // Shadow DOM içindeki elementler host'un kökü SearchContext'i üzerinden aranır.
         SearchContext shadowRoot = shadowHost.getShadowRoot();
